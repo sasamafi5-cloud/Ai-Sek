@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#060614">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Luna AI">
+<title>Luna AI Sekretarica</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep:#060614; --bg-mid:#0c0c22; --bg-card:#10103a; --bg-card2:#161650;
+  --bg-light:#e2e4f0; --bg-light2:#eceef8;
+  --neon-blue:#4f8ef7; --neon-purple:#a855f7; --neon-pink:#ec4899; --neon-cyan:#22d3ee; --neon-orange:#f59e0b;
+  --text-w:#ffffff; --text-dim:rgba(255,255,255,0.55); --text-muted:rgba(255,255,255,0.3);
+  --text-dark:#1a1a3a; --accent:#4f8ef7;
+  /* 3D sliders — all 0-100 */
+  --p3d-height:50; --p3d-depth:50; --p3d-thickness:50; --p3d-extrusion:50;
+  --p3d-perspective:50; --p3d-persp-dist:50; --p3d-curvature:50; --p3d-corner:50;
+  --p3d-edge-thick:50; --p3d-layer-sep:50; --p3d-float-height:50; --p3d-float-dist:50;
+  --p3d-shadow-depth:50; --p3d-shadow-dist:50; --p3d-shadow-soft:50; --p3d-shadow-opac:50;
+  --p3d-inner-shadow:50; --p3d-outer-shadow:50; --p3d-multi-shadow:50; --p3d-ao:50; --p3d-depth-enh:50;
+  --p3d-glass-trans:50; --p3d-glass-blur:50; --p3d-glass-refl:50; --p3d-glass-edge:50;
+  --p3d-glass-depth:50; --p3d-glass-thick:50; --p3d-crystal:50; --p3d-premium-glass:50;
+  --p3d-refl-str:50; --p3d-refl-width:50; --p3d-refl-angle:50; --p3d-highlight:50;
+  --p3d-shine:50; --p3d-metallic:50; --p3d-dyn-refl:50; --p3d-specular:50;
+  --p3d-glow-int:50; --p3d-glow-rad:50; --p3d-glow-soft:50; --p3d-blue-amb:50;
+  --p3d-purple-amb:50; --p3d-white-acc:50; --p3d-edge-light:50; --p3d-halo:50;
+  --p3d-neon:50; --p3d-bloom:50; --p3d-scatter:50; --p3d-volumetric:50;
+  --p3d-float-str:50; --p3d-hover-lift:50; --p3d-hover-depth:50; --p3d-hover-anim:50;
+  --p3d-hover-persp:50; --p3d-hover-shadow:50;
+  --p3d-bg-depth:50; --p3d-card-depth:50; --p3d-icon-depth-p:50; --p3d-mic-depth-p:50;
+  --p3d-tilt:50; --p3d-motion:50; --p3d-persp-motion:50;
+  --p3d-icon-depth:50; --p3d-icon-thick:50; --p3d-icon-refl:50; --p3d-icon-shadow:50;
+  --p3d-icon-glow:50; --p3d-icon-elev:50;
+  --p3d-btn-depth:50; --p3d-btn-thick:50; --p3d-mic-elev:50; --p3d-pulse-glow:50;
+  --p3d-outer-glow:50; --p3d-ring-thick:50; --p3d-ring-refl:50; --p3d-ring-bright:50;
+  --p3d-nav-depth:50; --p3d-nav-thick:50; --p3d-nav-refl:50; --p3d-nav-shadow:50; --p3d-nav-glow:50;
+  --p3d-anim-smooth:50; --p3d-anim-speed:50; --p3d-spring:50; --p3d-click-comp:50;
+  --p3d-trans-qual:50; --p3d-motion-sm:50;
+  --p3d-ultra3d:50; --p3d-premium-boost:50; --p3d-luxury:50; --p3d-future-tech:50;
+  --p3d-cinematic:50; --p3d-realistic-mat:50; --p3d-phys-light:50; --p3d-adv-shadow:50;
+  --p3d-adv-refl:50; --p3d-ultra-glass:50; --p3d-wow:50;
+  /* Computed */
+  --c-r: calc(16px + var(--p3d-corner)*0.18px);
+  --c-r-sm: calc(10px + var(--p3d-corner)*0.12px);
+  --c-float: calc(var(--p3d-float-height)*-0.08px);
+  --c-sy: calc(var(--p3d-shadow-dist)*0.16px);
+  --c-sb: calc(var(--p3d-shadow-soft)*0.44px);
+  --c-so: calc(var(--p3d-shadow-opac)*0.008);
+  --c-gr: calc(var(--p3d-glow-rad)*0.44px);
+  --c-gi: calc(var(--p3d-glow-int)*0.008);
+  --c-hl: calc(var(--p3d-highlight)*0.005);
+  --c-d3: calc(var(--p3d-depth)*0.16px);
+  --c-tk: calc(var(--p3d-thickness)*0.05px);
+  --c-gb: calc(var(--p3d-glass-blur)*0.18px);
+  --c-tr: calc(0.15s + (100 - var(--p3d-anim-speed))*0.003s);
+}
+[data-theme="light"] {
+  --bg-deep:#d4d7e8; --bg-mid:#dce0f0; --bg-card:#e8ebf8; --bg-card2:#f0f3ff;
+  --bg-light:#c8cce0; --text-w:#1a1a3a; --text-dim:rgba(26,26,58,.65);
+  --text-muted:rgba(26,26,58,.38); --neon-blue:#2563eb; --neon-purple:#7c3aed; --accent:#2563eb;
+}
+[data-theme="amoled"] { --bg-deep:#000; --bg-mid:#050508; --bg-card:#0a0a10; --bg-card2:#0f0f18; }
+
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Inter',sans-serif;background:var(--bg-deep);color:var(--text-w);user-select:none}
+#app{width:100%;max-width:430px;height:100dvh;margin:0 auto;display:flex;flex-direction:column;overflow:hidden;position:relative;background:var(--bg-deep)}
+
+.screen{position:absolute;inset:0;display:flex;flex-direction:column;transition:transform var(--c-tr) cubic-bezier(.4,0,.2,1),opacity var(--c-tr);will-change:transform,opacity}
+.screen.hidden{transform:translateX(100%);opacity:0;pointer-events:none}
+.screen.slide-left{transform:translateX(-100%);opacity:0;pointer-events:none}
+
+/* 3D CARD */
+.card3d{position:relative;transform-style:preserve-3d;transition:transform var(--c-tr) cubic-bezier(.34,1.56,.64,1),box-shadow var(--c-tr) ease;transform:translateY(var(--c-float)) translateZ(0);border-radius:var(--c-r);overflow:hidden}
+.card3d::before{content:'';position:absolute;top:0;left:0;right:0;height:calc(1px + var(--c-tk));background:linear-gradient(90deg,transparent,rgba(255,255,255,calc(var(--c-hl)+.09)) 35%,rgba(255,255,255,calc(var(--c-hl)+.15)) 50%,rgba(255,255,255,calc(var(--c-hl)+.07)) 65%,transparent);z-index:2;pointer-events:none}
+.card3d::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,calc(var(--c-hl)*.5)) 0%,transparent 40%,transparent 60%,rgba(0,0,0,calc(var(--c-so)*.25)) 100%);backdrop-filter:blur(calc(var(--c-gb)*.3));z-index:1;pointer-events:none;border-radius:inherit}
+.card3d:active{transform:translateY(calc(var(--c-float)*.2+2px)) scale(.97) translateZ(0)}
+.card3d-dark{background:linear-gradient(135deg,#1e1e5a 0%,#252575 60%,rgba(79,142,247,.15) 100%);border:1px solid rgba(255,255,255,.12);box-shadow:0 var(--c-sy) var(--c-sb) rgba(0,0,0,calc(var(--c-so)+.5)),0 var(--c-d3) calc(var(--c-d3)*2) rgba(0,0,0,calc(var(--c-so)*2+.3)),inset 0 1px 0 rgba(255,255,255,calc(var(--c-hl)*.25+.05)),inset 0 -1px 0 rgba(0,0,0,.3),0 0 var(--c-gr) rgba(79,142,247,var(--c-gi))}
+.card3d-light{background:linear-gradient(135deg,#ffffff 0%,#f0f4ff 50%,#e8eeff 100%);border:1px solid rgba(100,120,255,.2);box-shadow:calc(var(--c-sy)*.6) calc(var(--c-sy)*.8) calc(var(--c-sb)*.6) rgba(0,0,0,.1),calc(var(--c-sy)*-.2) calc(var(--c-sy)*-.3) calc(var(--c-sb)*.4) rgba(255,255,255,.9),0 0 calc(var(--c-gr)*.4) rgba(79,142,247,calc(var(--c-gi)*.5));color:var(--text-dark)}
+[data-theme="light"] .card3d-light{background:linear-gradient(135deg,#f0f3ff,#e8ecff);box-shadow:6px 6px 16px rgba(0,0,0,.09),-3px -3px 10px rgba(255,255,255,.85)}
+
+.icon3d{position:relative;display:flex;align-items:center;justify-content:center;transition:transform var(--c-tr) cubic-bezier(.34,1.56,.64,1);overflow:hidden;isolation:isolate}
+.icon3d::before{content:'';position:absolute;top:0;left:0;right:0;height:45%;background:linear-gradient(180deg,rgba(255,255,255,calc(var(--c-hl)*.3+.12)) 0%,transparent 100%);z-index:1;pointer-events:none}
+.icon3d-blue{background:linear-gradient(135deg,#2563eb,#3b82f6 40%,#60a5fa);box-shadow:0 calc(var(--c-sy)*.7) calc(var(--c-sb)*.6) rgba(30,78,189,calc(var(--c-so)+.4)),inset 0 1px 0 rgba(255,255,255,.35),0 0 calc(var(--c-gr)*.8) rgba(79,142,247,calc(var(--c-gi)*1.5))}
+.icon3d-orange{background:linear-gradient(135deg,#92400e,#d97706 40%,#fbbf24);box-shadow:0 calc(var(--c-sy)*.7) calc(var(--c-sb)*.6) rgba(146,64,14,calc(var(--c-so)+.4)),inset 0 1px 0 rgba(255,255,255,.3),0 0 calc(var(--c-gr)*.8) rgba(245,158,11,calc(var(--c-gi)*1.5))}
+.icon3d-purple{background:linear-gradient(135deg,#4c1d95,#7c3aed 40%,#a78bfa);box-shadow:0 calc(var(--c-sy)*.7) calc(var(--c-sb)*.6) rgba(76,29,149,calc(var(--c-so)+.4)),inset 0 1px 0 rgba(255,255,255,.3),0 0 calc(var(--c-gr)*.8) rgba(168,85,247,calc(var(--c-gi)*1.5))}
+.icon3d-green{background:linear-gradient(135deg,#064e3b,#059669 40%,#34d399);box-shadow:0 calc(var(--c-sy)*.7) calc(var(--c-sb)*.6) rgba(6,78,59,calc(var(--c-so)+.4)),inset 0 1px 0 rgba(255,255,255,.3),0 0 calc(var(--c-gr)*.8) rgba(52,211,153,calc(var(--c-gi)*1.5))}
+
+/* HEADER */
+.header{background:var(--bg-deep);padding:8px 14px 7px;flex-shrink:0;z-index:10}
+.header-top{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.av-wrap{position:relative;width:42px;height:42px;flex-shrink:0}
+.av-ring{position:absolute;inset:-3px;border-radius:50%;background:conic-gradient(from 0deg,var(--neon-pink),var(--neon-blue),var(--neon-purple),var(--neon-cyan),var(--neon-pink));animation:spin 4s linear infinite;filter:blur(.5px)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.av-inner{position:relative;width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,#4c1d95,#1e3a8a);display:flex;align-items:center;justify-content:center;font-size:19px;z-index:1;border:2px solid var(--bg-deep);box-shadow:inset 0 2px 4px rgba(255,255,255,.2),0 0 14px rgba(168,85,247,.4)}
+.agent-info{flex:1}
+.agent-name{font-size:17px;font-weight:800;letter-spacing:-.3px;background:linear-gradient(135deg,#fff 0%,#93c5fd 60%,var(--neon-blue) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.agent-sub{font-size:9px;color:var(--text-muted);margin-top:0}
+.hdr-right{display:flex;gap:6px;align-items:center;flex-shrink:0}
+.ai-badge{display:flex;align-items:center;gap:4px;padding:4px 8px;border-radius:20px;font-size:10px;font-weight:700;transition:all .3s}
+.ai-badge.groq{background:linear-gradient(135deg,#d97706,#f59e0b,#fcd34d);color:#1a0800;box-shadow:0 2px 10px rgba(245,158,11,.5),inset 0 1px 0 rgba(255,255,255,.3)}
+.ai-badge.offline{background:linear-gradient(135deg,#374151,#4b5563);color:#d1d5db;box-shadow:0 2px 6px rgba(0,0,0,.4)}
+.theme-tog{width:31px;height:31px;border-radius:50%;background:var(--bg-card);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.07);transition:transform .2s}
+.theme-tog:active{transform:scale(.9)}
+.user-pill{background:linear-gradient(135deg,var(--neon-blue),var(--neon-cyan));color:#fff;font-size:11px;font-weight:700;padding:5px 10px;border-radius:18px;cursor:pointer;box-shadow:0 2px 8px rgba(79,142,247,.5),inset 0 1px 0 rgba(255,255,255,.25)}
+.search-bar{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:11px;background:linear-gradient(135deg,var(--bg-card),var(--bg-card2));border:1px solid rgba(255,255,255,.07);box-shadow:inset 0 2px 6px rgba(0,0,0,.4)}
+.search-bar input{flex:1;background:none;border:none;outline:none;color:var(--text-w);font-size:14px;font-family:inherit}
+.search-bar input::placeholder{color:var(--text-muted)}
+.srow{display:flex;gap:5px;padding:3px 0 0;flex-wrap:wrap}
+.sdot{display:flex;align-items:center;gap:3px;font-size:9px;color:var(--text-muted);font-weight:600}
+.sdot::before{content:'';width:5px;height:5px;border-radius:50%;background:#4b5563}
+.sdot.ok::before{background:#22c55e;box-shadow:0 0 5px rgba(34,197,94,.7)}
+.sdot.err::before{background:#ef4444}
+
+.main-scroll{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.main-scroll::-webkit-scrollbar{display:none}
+
+/* DARK SECTION */
+.dark-sec{padding:8px 12px 0;background:var(--bg-deep)}
+.big-row{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:7px;height:160px}
+.card-aktuelno-tall{min-height:0;flex:1;padding:12px;display:flex;flex-direction:column;background:linear-gradient(145deg,#1a2f7a,#2040a0 40%,#2850c0 70%,#3060d0 100%);border:1px solid rgba(79,142,247,.5);box-shadow:0 var(--c-sy) var(--c-sb) rgba(0,0,0,.55),0 var(--c-d3) calc(var(--c-d3)*2) rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.15),0 0 calc(var(--c-gr)*1.5) rgba(79,142,247,.35);overflow:hidden;position:relative}
+.card-mini{flex:1;padding:8px 10px;cursor:pointer;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(145deg,#1e1e5a,#252575 60%,rgba(79,142,247,.15) 100%);border:1px solid rgba(255,255,255,.14);box-shadow:0 3px 10px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.1);position:relative;overflow:hidden;border-radius:var(--c-r);min-height:0}
+.card-notes{min-height:118px;padding:11px;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(145deg,#1a2f7a,#2040a0 40%,#2850c0 70%,#3060d0 100%);border:1px solid rgba(79,142,247,.5);box-shadow:0 var(--c-sy) var(--c-sb) rgba(0,0,0,calc(var(--c-so)+.5)),0 var(--c-d3) calc(var(--c-d3)*2) rgba(0,0,0,calc(var(--c-so)+.3)),inset 0 1px 0 rgba(255,255,255,calc(var(--c-hl)*.3+.08)),0 0 calc(var(--c-gr)*1.5) rgba(79,142,247,calc(var(--c-gi)*2))}
+.card-alarmi{padding:9px;cursor:pointer;background:linear-gradient(145deg,#3d2000,#5a3000 40%,#703800 70%,#805000 100%);border:1px solid rgba(245,158,11,.5);box-shadow:0 var(--c-sy) var(--c-sb) rgba(0,0,0,calc(var(--c-so)+.5)),inset 0 1px 0 rgba(255,255,255,calc(var(--c-hl)*.2+.05)),0 0 var(--c-gr) rgba(245,158,11,calc(var(--c-gi)*1.5))}
+.card-right{display:flex;flex-direction:column;gap:6px;height:100%}
+.card-aktuelno{flex:1;padding:9px;background:linear-gradient(145deg,#1a1a4a,#202060 60%,#2a1a5a 100%);border:1px solid rgba(168,85,247,.4);box-shadow:0 var(--c-sy) var(--c-sb) rgba(0,0,0,calc(var(--c-so)+.4)),inset 0 1px 0 rgba(255,255,255,calc(var(--c-hl)*.2+.04)),0 0 var(--c-gr) rgba(168,85,247,var(--c-gi))}
+.cb{position:absolute;top:8px;right:8px;min-width:19px;height:19px;border-radius:10px;background:#ef4444;color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;padding:0 4px;box-shadow:0 2px 8px rgba(239,68,68,.6),inset 0 1px 0 rgba(255,255,255,.3);z-index:5}
+.cico{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:6px;box-shadow:0 3px 10px rgba(0,0,0,.4)}
+.ctitle{font-size:14px;font-weight:800;color:#ffffff;line-height:1;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+.csub{font-size:10px;color:rgba(255,255,255,.8);margin-top:1px}
+.card-alarmi-row{display:flex;align-items:center;gap:11px}
+.ak-label{font-size:8px;font-weight:800;letter-spacing:1px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:5px}
+.ak-item{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:5px 8px;margin-bottom:4px;font-size:11px;font-weight:600;color:rgba(255,255,255,.95);line-height:1.3}
+.ak-item .ak-emoji{font-size:14px;flex-shrink:0}
+.ak-item .ak-text{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ak-item .ak-time{font-size:9px;color:rgba(255,255,255,.5);flex-shrink:0}
+
+.led{position:absolute;bottom:0;left:10%;right:10%;height:2px;border-radius:2px;animation:lp 2s ease-in-out infinite}
+.led-b{background:linear-gradient(90deg,transparent,var(--neon-blue),var(--neon-cyan),transparent);box-shadow:0 0 8px var(--neon-blue),0 0 18px var(--neon-cyan)}
+.led-o{background:linear-gradient(90deg,transparent,#f59e0b,#fbbf24,transparent);box-shadow:0 0 8px #f59e0b,0 0 18px #fbbf24;animation-delay:.5s}
+@keyframes lp{0%,100%{opacity:.5}50%{opacity:1}}
+
+/* WAVE */
+.wave-svg{display:block;width:100%;height:28px;margin-top:5px}
+
+/* LIGHT SECTION */
+.light-sec{background:var(--bg-light);padding:9px 12px 6px}
+[data-theme="dark"] .light-sec,[data-theme="amoled"] .light-sec{background:linear-gradient(180deg,#e2e4f0,#e8eaf8)}
+.lrow{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:9px}
+.lcard{padding:9px;cursor:pointer;display:flex;align-items:center;gap:8px;border-radius:12px;transition:all var(--c-tr) cubic-bezier(.34,1.56,.64,1)}
+.lcard:active{transform:scale(.96)}
+.lcard-ico{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.lcard-title{font-size:12px;font-weight:700;color:#1a1a3a;}
+.lcard-sub{font-size:9px;color:rgba(26,26,58,.5);margin-top:1px}
+
+/* PERSONALITIES */
+.pl{font-size:8px;font-weight:800;letter-spacing:1px;color:rgba(26,26,58,.4);text-transform:uppercase;margin-bottom:5px;padding-left:2px}
+.pers-row{display:flex;gap:5px;justify-content:space-between;margin-bottom:8px}
+.pb{flex:1;padding:6px 2px 5px;text-align:center;cursor:pointer;border-radius:11px;border:2px solid transparent;background:linear-gradient(145deg,#f0f4ff,#e4eaff);box-shadow:3px 3px 8px rgba(0,0,0,.12),-2px -2px 6px rgba(255,255,255,.8);transition:all var(--c-tr) cubic-bezier(.34,1.56,.64,1)}
+.pb:active{transform:scale(.93)}
+.pb.active{border-color:var(--neon-blue);box-shadow:4px 4px 10px rgba(0,0,0,.1),-2px -2px 8px rgba(255,255,255,.85),0 0 0 1px var(--neon-blue),0 0 14px rgba(79,142,247,.3),inset 0 1px 0 rgba(255,255,255,.9)}
+.pe{font-size:17px;margin-bottom:1px;line-height:1}
+.plab{font-size:7px;font-weight:700;color:rgba(26,26,58,.55)}
+.pb.active .plab{color:var(--neon-blue)}
+
+/* MICROPHONE */
+.mic-area{display:flex;flex-direction:column;align-items:center;padding:4px 0 6px}
+.mic-outer{position:relative;width:82px;height:82px;display:flex;align-items:center;justify-content:center;margin-bottom:6px}
+.mic-halo{position:absolute;border-radius:50%;border:1px solid transparent;animation:hp 2.4s ease-in-out infinite;pointer-events:none}
+.mic-halo:nth-child(1){width:74px;height:74px;border-color:rgba(79,142,247,calc(var(--c-gi)*8+.15));box-shadow:0 0 var(--c-gr) rgba(79,142,247,calc(var(--c-gi)*4));animation-delay:0s}
+.mic-halo:nth-child(2){width:80px;height:80px;border-color:rgba(168,85,247,calc(var(--c-gi)*6+.1));animation-delay:.4s}
+.mic-halo:nth-child(3){width:86px;height:86px;border-color:rgba(236,72,153,calc(var(--c-gi)*4+.07));animation-delay:.8s}
+@keyframes hp{0%,100%{transform:scale(1);opacity:.4}50%{transform:scale(1.06);opacity:1}}
+.mic-gring{position:absolute;width:66px;height:66px;border-radius:50%;background:conic-gradient(from 0deg,var(--neon-pink),var(--neon-blue),var(--neon-purple),var(--neon-cyan),var(--neon-pink));-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - calc(var(--p3d-ring-thick)*.04px + 2px)),black calc(100% - calc(var(--p3d-ring-thick)*.04px + 2px)));mask:radial-gradient(farthest-side,transparent calc(100% - calc(var(--p3d-ring-thick)*.04px + 2px)),black calc(100% - calc(var(--p3d-ring-thick)*.04px + 2px)));animation:spin 3s linear infinite;filter:brightness(calc(var(--p3d-ring-bright)*.015+.7)) drop-shadow(0 0 calc(var(--p3d-outer-glow)*.18px) rgba(79,142,247,.6))}
+.mic-btn{position:relative;z-index:2;width:54px;height:54px;border-radius:50%;background:linear-gradient(145deg,#1a2560,#2535a0 40%,#1a1f80);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(--c-tr) cubic-bezier(.34,1.56,.64,1);box-shadow:0 calc(var(--p3d-btn-depth)*.11px+5px) calc(var(--p3d-btn-depth)*.28px+14px) rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.15),inset 0 -2px 4px rgba(0,0,0,.4),0 0 calc(var(--p3d-pulse-glow)*.36px+9px) rgba(79,142,247,calc(var(--p3d-pulse-glow)*.006+.2)),0 0 calc(var(--p3d-outer-glow)*.55px+18px) rgba(168,85,247,calc(var(--p3d-outer-glow)*.004+.1))}
+.mic-btn:active{transform:scale(.91);box-shadow:0 2px 8px rgba(0,0,0,.7),inset 0 2px 6px rgba(0,0,0,.5),0 0 28px rgba(79,142,247,.7),0 0 55px rgba(168,85,247,.4)}
+.mic-btn svg{width:22px;height:22px;fill:white;position:relative;z-index:1}
+.mic-btn.listening{animation:mbr .8s ease-in-out infinite;box-shadow:0 8px 24px rgba(0,0,0,.6),0 0 38px rgba(79,142,247,.8),0 0 75px rgba(168,85,247,.5)}
+@keyframes mbr{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+.lwav{display:flex;gap:3px;align-items:center;height:20px;justify-content:center;margin-bottom:5px}
+.lwav.hidden{visibility:hidden}
+.wb{width:3px;background:linear-gradient(to top,var(--neon-blue),var(--neon-purple));border-radius:2px;animation:wd .7s ease-in-out infinite}
+.wb:nth-child(1){height:4px;animation-delay:0s}.wb:nth-child(2){height:4px;animation-delay:.1s}.wb:nth-child(3){height:4px;animation-delay:.2s}
+.wb:nth-child(4){height:4px;animation-delay:.3s}.wb:nth-child(5){height:4px;animation-delay:.4s}.wb:nth-child(6){height:4px;animation-delay:.5s}.wb:nth-child(7){height:4px;animation-delay:.6s}
+@keyframes wd{0%,100%{height:4px}50%{height:19px}}
+.mic-lbl{font-size:8px;font-weight:800;letter-spacing:1.5px;color:rgba(26,26,58,.4);text-transform:uppercase}
+
+/* BOTTOM NAV */
+.bottom-nav{flex-shrink:0;padding:0 7px 10px;background:var(--bg-light)}
+[data-theme="dark"] .bottom-nav,[data-theme="amoled"] .bottom-nav{background:linear-gradient(180deg,#e2e4f0,#eceef8)}
+.nav-inner{display:flex;align-items:center;background:linear-gradient(135deg,#1a1a3a,#0f1230 40%,#12123a);border-radius:14px;padding:4px 2px;box-shadow:0 calc(var(--p3d-nav-depth)*.12px+5px) calc(var(--p3d-nav-thick)*.28px+14px) rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,calc(var(--p3d-nav-refl)*.002+.08)),0 0 calc(var(--p3d-nav-glow)*.38px+7px) rgba(79,142,247,calc(var(--p3d-nav-glow)*.003+.1)),inset 0 -1px 0 rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.09);position:relative;overflow:hidden}
+.nav-inner::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent)}
+.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:5px 1px;cursor:pointer;border-radius:13px;transition:all var(--c-tr);border:none;background:none;color:rgba(255,255,255,.38);position:relative}
+.nav-btn.active{color:white;background:linear-gradient(135deg,rgba(79,142,247,.24),rgba(168,85,247,.14));box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 11px rgba(79,142,247,.22)}
+.nav-btn.active::after{content:'';position:absolute;bottom:1px;left:50%;transform:translateX(-50%);width:18px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--neon-blue),var(--neon-purple));box-shadow:0 0 6px var(--neon-blue)}
+.nav-btn svg{width:16px;height:16px}
+.nav-btn span{font-size:7px;font-weight:700;letter-spacing:.2px}
+.nav-btn:active{transform:scale(.88)}
+
+/* SUB SCREENS */
+.sub-hdr{background:var(--bg-deep);padding:13px 17px 11px;display:flex;align-items:center;gap:11px;flex-shrink:0;border-bottom:1px solid rgba(255,255,255,.05)}
+.back-btn{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--bg-card),var(--bg-card2));border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;box-shadow:0 4px 11px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.07);font-size:17px;color:var(--text-w);transition:transform .2s}
+.back-btn:active{transform:scale(.9)}
+.sub-title{font-size:17px;font-weight:700}
+.sub-add{margin-left:auto;width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--neon-blue),var(--neon-purple));border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;color:white;box-shadow:0 3px 13px rgba(79,142,247,.5),inset 0 1px 0 rgba(255,255,255,.25);transition:transform .2s}
+.sub-add:active{transform:scale(.9)}
+.lscroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:11px 15px 80px}
+.lscroll::-webkit-scrollbar{display:none}
+
+.li{display:flex;align-items:flex-start;gap:10px;padding:12px 13px;margin-bottom:8px;border-radius:13px;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(135deg,#1a1a50,#20207a);border:1px solid rgba(255,255,255,.15);box-shadow:0 var(--c-sy) var(--c-sb) rgba(0,0,0,calc(var(--c-so)+.4)),inset 0 1px 0 rgba(255,255,255,calc(var(--c-hl)*.2+.04));transition:transform var(--c-tr),box-shadow var(--c-tr)}
+.li::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.09),transparent)}
+.li:active{transform:scale(.97) translateY(1px)}
+.li.done .it{text-decoration:line-through;opacity:.45}
+.lico{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--bg-card2),rgba(79,142,247,.13));display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;border:1px solid rgba(255,255,255,.06);box-shadow:inset 0 2px 4px rgba(0,0,0,.4)}
+.lb{flex:1;min-width:0}
+.it{font-size:13px;font-weight:600;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.is{font-size:11px;color:var(--text-dim)}
+.im{display:flex;gap:4px;align-items:center;margin-top:4px;flex-wrap:wrap}
+.tag{font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;background:rgba(79,142,247,.15);color:var(--neon-blue)}
+.tag.urgent{background:rgba(239,68,68,.15);color:#ef4444}
+.tag.done{background:rgba(34,197,94,.15);color:#22c55e}
+.lia{display:flex;gap:4px;margin-left:auto;flex-shrink:0}
+.ibtn{width:27px;height:27px;border-radius:7px;background:rgba(255,255,255,.06);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;box-shadow:inset 0 1px 3px rgba(0,0,0,.3);transition:transform .15s}
+.ibtn:active{transform:scale(.88)}
+.pbar{position:absolute;left:0;top:7px;bottom:7px;width:3px;border-radius:0 2px 2px 0}
+.pbar.high{background:#ef4444;box-shadow:0 0 6px rgba(239,68,68,.6)}
+.pbar.medium{background:#f59e0b}
+.pbar.low{background:#22c55e}
+.empty{text-align:center;padding:48px 20px;color:var(--text-muted)}
+.empty .ei{font-size:44px;margin-bottom:10px}
+.empty p{font-size:13px}
+
+/* MODAL */
+.moverlay{position:fixed;inset:0;background:rgba(0,0,0,.65);backdrop-filter:blur(12px);z-index:100;display:flex;align-items:flex-end;transition:opacity .3s}
+.moverlay.hidden{opacity:0;pointer-events:none}
+.msheet{background:linear-gradient(180deg,var(--bg-mid),var(--bg-deep));border-radius:27px 27px 0 0;padding:19px;width:100%;max-height:90vh;overflow-y:auto;border:1px solid rgba(255,255,255,.1);border-bottom:none;box-shadow:0 -8px 38px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.1);transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.moverlay.hidden .msheet{transform:translateY(100%)}
+.mhandle{width:38px;height:4px;border-radius:2px;background:rgba(255,255,255,.2);margin:0 auto 17px}
+.mtitle{font-size:17px;font-weight:700;margin-bottom:16px}
+.ig{margin-bottom:12px}
+.ilbl{font-size:10px;font-weight:700;color:var(--text-dim);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.ifield{width:100%;background:linear-gradient(135deg,var(--bg-card),var(--bg-card2));border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:10px 12px;color:var(--text-w);font-size:14px;font-family:inherit;outline:none;transition:border-color .2s;box-shadow:inset 0 2px 6px rgba(0,0,0,.4)}
+.ifield:focus{border-color:var(--neon-blue);box-shadow:inset 0 2px 6px rgba(0,0,0,.4),0 0 0 2px rgba(79,142,247,.2)}
+textarea.ifield{resize:none;min-height:72px}
+.btn{padding:12px 17px;border-radius:11px;border:none;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;transition:transform .15s,box-shadow .15s;width:100%;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn:active{transform:scale(.97)}
+.btn-p{background:linear-gradient(135deg,var(--neon-blue),var(--neon-purple));color:white;box-shadow:0 4px 15px rgba(79,142,247,.4),inset 0 1px 0 rgba(255,255,255,.2)}
+.btn-s{background:linear-gradient(135deg,var(--bg-card),var(--bg-card2));color:var(--text-w);box-shadow:0 4px 11px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07)}
+.btn-d{background:linear-gradient(135deg,#b91c1c,#ef4444);color:white;box-shadow:0 4px 13px rgba(239,68,68,.35),inset 0 1px 0 rgba(255,255,255,.15)}
+.brow{display:flex;gap:8px}
+.brow .btn{flex:1}
+.tog-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.tog-lbl{font-size:13px;font-weight:500}
+.tog-sub{font-size:10px;color:var(--text-muted);margin-top:1px}
+.tog{width:46px;height:26px;border-radius:13px;background:var(--bg-card2);cursor:pointer;position:relative;transition:background .3s;box-shadow:inset 0 2px 4px rgba(0,0,0,.4);flex-shrink:0}
+.tog.on{background:linear-gradient(135deg,var(--neon-blue),var(--neon-purple))}
+.tog::after{content:'';position:absolute;width:20px;height:20px;border-radius:50%;background:white;top:3px;left:3px;transition:left .3s cubic-bezier(.34,1.56,.64,1);box-shadow:0 2px 5px rgba(0,0,0,.35)}
+.tog.on::after{left:23px}
+.psel{display:flex;gap:7px;margin-top:5px}
+.popt{flex:1;padding:7px;border-radius:9px;text-align:center;font-size:11px;font-weight:700;cursor:pointer;border:2px solid transparent;background:var(--bg-card);transition:all .2s}
+.popt.high{color:#ef4444}.popt.medium{color:#f59e0b}.popt.low{color:#22c55e}
+.popt.selected.high{border-color:#ef4444;background:rgba(239,68,68,.12)}
+.popt.selected.medium{border-color:#f59e0b;background:rgba(245,158,11,.12)}
+.popt.selected.low{border-color:#22c55e;background:rgba(34,197,94,.12)}
+select.ifield{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 12 12'%3E%3Cpath fill='white' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+
+/* CHAT */
+.chat-msgs{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:11px 14px;display:flex;flex-direction:column;gap:8px}
+.chat-msgs::-webkit-scrollbar{display:none}
+.msg{max-width:80%;padding:10px 14px;border-radius:16px;font-size:13px;line-height:1.5;animation:mi .25s cubic-bezier(.4,0,.2,1)}
+@keyframes mi{from{transform:translateY(8px);opacity:0}}
+.msg.user{align-self:flex-end;background:linear-gradient(135deg,var(--neon-blue),var(--neon-purple));color:white;border-bottom-right-radius:4px;box-shadow:0 3px 11px rgba(79,142,247,.35)}
+.msg.luna{align-self:flex-start;background:linear-gradient(135deg,var(--bg-card),var(--bg-card2));color:var(--text-w);border-bottom-left-radius:4px;border:1px solid rgba(255,255,255,.07);box-shadow:0 3px 11px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.05)}
+.msg-t{font-size:9px;opacity:.55;margin-top:3px}
+.tdots{display:flex;gap:3px;align-items:center;padding:3px 0}
+.td{width:6px;height:6px;border-radius:50%;background:var(--neon-blue);animation:td 1.1s ease-in-out infinite}
+.td:nth-child(2){animation-delay:.18s}.td:nth-child(3){animation-delay:.36s}
+@keyframes td{0%,60%,100%{transform:translateY(0);opacity:.3}30%{transform:translateY(-5px);opacity:1}}
+.chat-irow{padding:8px 13px 17px;display:flex;gap:6px;align-items:flex-end;background:var(--bg-deep);border-top:1px solid rgba(255,255,255,.05);flex-shrink:0}
+.cinput{flex:1;background:linear-gradient(135deg,var(--bg-card),var(--bg-card2));border:1px solid rgba(255,255,255,.08);border-radius:19px;padding:10px 14px;color:var(--text-w);font-size:13px;font-family:inherit;outline:none;resize:none;max-height:105px;min-height:40px;box-shadow:inset 0 2px 5px rgba(0,0,0,.3)}
+.csend,.cmicb{width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .15s}
+.csend:active,.cmicb:active{transform:scale(.9)}
+.csend{background:linear-gradient(135deg,var(--neon-blue),var(--neon-purple));box-shadow:0 3px 11px rgba(79,142,247,.4)}
+.csend svg{width:18px;height:18px;fill:white}
+.cmicb{background:linear-gradient(135deg,var(--bg-card),var(--bg-card2));box-shadow:0 3px 9px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07)}
+.hwav{display:flex;gap:3px;align-items:center;height:19px;margin-right:5px}
+.hwav.hidden{display:none}
+.hwav .wb{background:linear-gradient(to top,var(--neon-blue),var(--neon-purple))}
+
+/* SETTINGS */
+.ssec{margin-bottom:17px}
+.sstitle{font-size:10px;font-weight:800;letter-spacing:1.2px;color:var(--text-muted);text-transform:uppercase;margin-bottom:7px;padding-left:2px}
+.scard{background:linear-gradient(135deg,var(--bg-card),var(--bg-card2));border-radius:15px;padding:4px 13px;box-shadow:0 var(--c-sy) var(--c-sb) rgba(0,0,0,calc(var(--c-so)+.3)),inset 0 1px 0 rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.05)}
+.slr{margin-bottom:9px}
+.slrow{display:flex;justify-content:space-between;margin-bottom:4px}
+.sllbl{font-size:11px;color:var(--text-dim);font-weight:500}
+.slval{font-size:11px;color:var(--neon-blue);font-weight:700;min-width:26px;text-align:right}
+input[type=range]{-webkit-appearance:none;width:100%;height:3px;border-radius:2px;background:var(--bg-card2);outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;height:17px;border-radius:50%;background:linear-gradient(135deg,var(--neon-blue),var(--neon-purple));cursor:pointer;box-shadow:0 2px 7px rgba(79,142,247,.5);transition:transform .1s}
+input[type=range]::-webkit-slider-thumb:active{transform:scale(1.2)}
+.trow{display:flex;gap:8px;padding:7px 0}
+.topt{flex:1;padding:8px 5px;border-radius:11px;text-align:center;cursor:pointer;font-size:10px;font-weight:700;transition:all .2s;border:2px solid transparent}
+.topt.active{border-color:var(--neon-blue)}
+.tl{background:#e8e8f0;color:#1a1a3a}.td2{background:#141430;color:white}.ta{background:#000;color:white}
+/* 3D CP */
+.cph{display:flex;align-items:center;gap:7px;padding:11px 0 7px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.05);margin-bottom:5px}
+.cpht{font-size:11px;font-weight:700;color:var(--text-dim);flex:1}
+.cpar{font-size:11px;color:var(--text-muted);transition:transform .2s}
+.cpar.open{transform:rotate(180deg)}
+.cpb{display:none;padding:3px 0 7px}
+.cpb.open{display:block}
+.spill{display:inline-flex;align-items:center;gap:4px;padding:4px 9px;border-radius:18px;font-size:10px;font-weight:600;background:var(--bg-card);border:1px solid rgba(255,255,255,.06);box-shadow:0 2px 5px rgba(0,0,0,.3)}
+/* Calendar */
+.cgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cdh{text-align:center;font-size:9px;font-weight:700;color:var(--text-muted);padding:3px 0}
+.cd{aspect-ratio:1;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;cursor:pointer;transition:all .2s;position:relative}
+.cd.other{opacity:.3}
+.cd.today{background:linear-gradient(135deg,var(--neon-blue),var(--neon-purple));color:white;font-weight:700;box-shadow:0 2px 8px rgba(79,142,247,.4)}
+.cd.has-ev::after{content:'';position:absolute;bottom:2px;width:4px;height:4px;border-radius:50%;background:var(--neon-pink)}
+.cnav{display:flex;align-items:center;justify-content:space-between;padding:0 1px 9px}
+.cnbtn{width:28px;height:28px;border-radius:8px;background:var(--bg-card);border:none;color:var(--text-w);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 7px rgba(0,0,0,.3)}
+.cmonth{font-size:13px;font-weight:700}
+/* Alarm screen */
+.alrscr{position:fixed;inset:0;z-index:300;background:radial-gradient(ellipse at center,#1a0a3a,#050510);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:19px;animation:abp 1s ease-in-out infinite}
+.alrscr.hidden{display:none}
+@keyframes abp{0%,100%{background:radial-gradient(ellipse at center,#1a0a3a,#050510)}50%{background:radial-gradient(ellipse at center,#2a0a50,#060520)}}
+.alrbell{font-size:78px;animation:bsh .5s ease-in-out infinite}
+@keyframes bsh{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(12deg)}}
+.alrname{font-size:25px;font-weight:800;text-align:center}
+.alrtime{font-size:50px;font-weight:200;letter-spacing:-2px}
+/* Toast */
+.toast{position:fixed;top:17px;left:50%;transform:translateX(-50%) translateY(-80px);background:rgba(20,20,50,.95);color:var(--text-w);padding:10px 17px;border-radius:13px;font-size:12px;font-weight:600;z-index:999;transition:transform .28s cubic-bezier(.4,0,.2,1);box-shadow:0 8px 22px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.1);white-space:nowrap;max-width:300px;text-align:center;backdrop-filter:blur(16px)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.spinner{width:17px;height:17px;border:2px solid rgba(255,255,255,.2);border-top-color:white;border-radius:50%;animation:sp .7s linear infinite;display:inline-block}
+@keyframes sp{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body data-theme="dark">
+<div id="app">
+
+<div id="alarmActiveScreen" class="alrscr hidden">
+  <div class="alrbell">🔔</div>
+  <div id="alarmActiveName" class="alrname">Alarm</div>
+  <div id="alarmActiveTime" class="alrtime">--:--</div>
+  <div style="display:flex;gap:11px;margin-top:7px">
+    <button class="btn btn-s" style="width:128px" onclick="snoozeAlarm()">⏰ Odloži 5min</button>
+    <button class="btn btn-d" style="width:128px" onclick="dismissAlarm()">✓ Zatvori</button>
+  </div>
+</div>
+
+<!-- HOME -->
+<div id="screenHome" class="screen">
+  <div class="header">
+    <div class="header-top">
+      <div class="av-wrap">
+        <div class="av-ring"></div>
+        <div class="av-inner">🤖</div>
+      </div>
+      <div class="agent-info">
+        <div class="agent-name">Luna</div>
+        <div class="agent-sub">Smart AI Sekretarica</div>
+      </div>
+      <div class="hdr-right">
+        <div id="aiStatusBadge" class="ai-badge offline">💻 Offline</div>
+        <div class="theme-tog" onclick="cycleTheme()" id="themeBtn">🌙</div>
+        <div class="user-pill" onclick="showScreen('screenSettings')" id="userPill">Saša</div>
+      </div>
+    </div>
+    <div class="search-bar">
+      <span style="color:var(--text-muted);font-size:14px">🔍</span>
+      <input type="text" placeholder="Pretraži sve..." id="globalSearch" oninput="doSearch(this.value)">
+    </div>
+    <div class="srow">
+      <div class="sdot" id="statusInternet">Internet</div>
+      <div class="sdot" id="statusGroq">Groq</div>
+      <div class="sdot" id="statusGemini">Gemini</div>
+      <div class="sdot" id="statusMic">Mik</div>
+      <div class="sdot" id="statusTTS">TTS</div>
+      <div class="sdot" id="statusDB">Baza</div>
+    </div>
+  </div>
+
+  <div class="main-scroll">
+    <div class="dark-sec">
+      <div class="big-row">
+        <div class="card3d card3d-dark card-aktuelno-tall" style="position:relative">
+          <div class="ak-label" style="font-size:9px;font-weight:800;letter-spacing:1px;color:rgba(255,255,255,.55);text-transform:uppercase;margin-bottom:8px">Aktuelno danas</div>
+          <div id="aktuelnoItems">
+            <div class="ak-item"><span>✨</span><span>Učitavam...</span></div>
+          </div>
+          <div class="led led-b"></div>
+        </div>
+        <div class="card-right">
+          <div class="card3d card3d-dark card-mini" onclick="showScreen('screenAlarms')" style="position:relative">
+            <div class="cb" id="alarmsCount" style="top:5px;right:5px;font-size:9px;min-width:15px;height:15px">0</div>
+            <div style="display:flex;align-items:center;gap:7px">
+              <div class="cico icon3d icon3d-orange" style="width:30px;height:30px;font-size:15px;margin-bottom:0;border-radius:9px">🔔</div>
+              <div><div class="ctitle" style="font-size:12px">Alarmi</div><div class="csub" id="alarmsStat">0 aktivnih</div></div>
+            </div>
+            <div class="led led-o"></div>
+          </div>
+          <div class="card3d card3d-dark card-mini" onclick="showScreen('screenTasks')" style="position:relative">
+            <div class="cb" id="tasksCountR" style="top:5px;right:5px;font-size:9px;min-width:15px;height:15px;background:#3b82f6;box-shadow:0 2px 6px rgba(59,130,246,.6)">0</div>
+            <div style="display:flex;align-items:center;gap:7px">
+              <div class="cico icon3d icon3d-green" style="width:30px;height:30px;font-size:15px;margin-bottom:0;border-radius:9px">✅</div>
+              <div><div class="ctitle" style="font-size:12px">Zadaci</div><div class="csub" id="tasksStatR">0 aktivnih</div></div>
+            </div>
+          </div>
+          <div class="card3d card3d-dark card-mini" onclick="showScreen('screenReminders')" style="position:relative">
+            <div style="display:flex;align-items:center;gap:7px">
+              <div class="cico icon3d icon3d-purple" style="width:30px;height:30px;font-size:15px;margin-bottom:0;border-radius:9px">⏰</div>
+              <div><div class="ctitle" style="font-size:12px">Podsetnici</div><div class="csub" id="remindersStatR">0 aktivnih</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <svg class="wave-svg" viewBox="0 0 430 42" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,0 L430,0 L430,10 Q360,27 215,27 Q70,27 0,10 Z" fill="#e2e4f0"/>
+    </svg>
+
+    <div class="light-sec">
+      <div class="lrow">
+        <div class="lcard card3d card3d-light" onclick="showScreen('screenTasks')" style="position:relative">
+          <div class="lcard-ico icon3d icon3d-blue">✅</div>
+          <div><div class="lcard-title">Zadaci</div><div class="lcard-sub" id="tasksStatL">0 aktivnih</div></div>
+          <div class="cb" id="tasksCount" style="background:#3b82f6;box-shadow:0 2px 8px rgba(59,130,246,.5)">0</div>
+        </div>
+        <div class="lcard card3d card3d-light" onclick="showScreen('screenCalendar')">
+          <div class="lcard-ico icon3d icon3d-purple">📅</div>
+          <div><div class="lcard-title">Planer</div><div class="lcard-sub" id="plannerSub">Danas</div></div>
+        </div>
+      </div>
+
+      <div class="pl">AI Ličnost</div>
+      <div class="pers-row" id="persRow">
+        <div class="pb active" data-p="smart" onclick="setPers('smart',this)"><div class="pe">🧠</div><div class="plab">Pametna</div></div>
+        <div class="pb" data-p="funny" onclick="setPers('funny',this)"><div class="pe">😜</div><div class="plab">Šaljiva</div></div>
+        <div class="pb" data-p="oracle" onclick="setPers('oracle',this)"><div class="pe">🔮</div><div class="plab">Sveznalica</div></div>
+        <div class="pb" data-p="business" onclick="setPers('business',this)"><div class="pe">💼</div><div class="plab">Poslovna</div></div>
+        <div class="pb" data-p="friendly" onclick="setPers('friendly',this)"><div class="pe">❤️</div><div class="plab">Prijat.</div></div>
+      </div>
+
+      <div class="mic-area">
+        <div class="mic-outer">
+          <div class="mic-halo"></div><div class="mic-halo"></div><div class="mic-halo"></div>
+          <div class="mic-gring"></div>
+          <button class="mic-btn" id="mainMicBtn" onclick="toggleVoiceInput()">
+            <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3zM19 10v2a7 7 0 0 1-14 0v-2H3v2a9 9 0 0 0 8 8.94V23h2v-2.06A9 9 0 0 0 21 12v-2h-2z"/></svg>
+          </button>
+        </div>
+        <div class="lwav hidden" id="listenWave">
+          <div class="wb"></div><div class="wb"></div><div class="wb"></div>
+          <div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div>
+        </div>
+        <div class="mic-lbl" id="micLabel">DODIRNI I KAŽI KOMANDU</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <div class="nav-inner">
+      <button class="nav-btn active" onclick="navTo('screenHome',this)">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        <span>Dom</span>
+      </button>
+      <button class="nav-btn" onclick="navTo('screenNotes',this)">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2l5 5h-5V4zM6 20V4h5v7h7v9H6z"/></svg>
+        <span>Beleške</span>
+      </button>
+      <button class="nav-btn" onclick="navTo('screenAlarms',this)">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+        <span>Alarmi</span>
+      </button>
+      <button class="nav-btn" onclick="navTo('screenTasks',this)">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+        <span>Zadaci</span>
+      </button>
+      <button class="nav-btn" onclick="navTo('screenCalendar',this)">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3h-1V1h-2v2H8V1H6v2H5C3.9 3 3 3.9 3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+        <span>Kalendar</span>
+      </button>
+      <button class="nav-btn" onclick="navTo('screenChat',this)">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+        <span>Chat</span>
+      </button>
+      <button class="nav-btn" onclick="navTo('screenSettings',this)">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.58 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg>
+        <span>Opcije</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- NOTES -->
+<div id="screenNotes" class="screen hidden">
+  <div class="sub-hdr"><div class="back-btn" onclick="goBack()">←</div><div class="sub-title">📋 Beleške</div><button class="sub-add" onclick="openModal('addNoteModal')">+</button></div>
+  <div class="lscroll" id="notesList"></div>
+</div>
+<!-- ALARMS -->
+<div id="screenAlarms" class="screen hidden">
+  <div class="sub-hdr"><div class="back-btn" onclick="goBack()">←</div><div class="sub-title">🔔 Alarmi</div><button class="sub-add" onclick="openModal('addAlarmModal')">+</button></div>
+  <div class="lscroll" id="alarmsList"></div>
+</div>
+<!-- TASKS -->
+<div id="screenTasks" class="screen hidden">
+  <div class="sub-hdr"><div class="back-btn" onclick="goBack()">←</div><div class="sub-title">✅ Zadaci</div><button class="sub-add" onclick="openModal('addTaskModal')">+</button></div>
+  <div class="lscroll" id="tasksList"></div>
+</div>
+<!-- REMINDERS -->
+<div id="screenReminders" class="screen hidden">
+  <div class="sub-hdr"><div class="back-btn" onclick="goBack()">←</div><div class="sub-title">⏰ Podsetnici</div><button class="sub-add" onclick="openModal('addReminderModal')">+</button></div>
+  <div class="lscroll" id="remindersList"></div>
+</div>
+<!-- CALENDAR -->
+<div id="screenCalendar" class="screen hidden">
+  <div class="sub-hdr"><div class="back-btn" onclick="goBack()">←</div><div class="sub-title">📅 Kalendar & Planer</div><button class="sub-add" onclick="openModal('addEventModal')">+</button></div>
+  <div class="lscroll">
+    <div class="card3d card3d-dark" style="padding:13px;margin-bottom:10px">
+      <div class="cnav"><button class="cnbtn" onclick="changeMonth(-1)">‹</button><div class="cmonth" id="calMonthLabel"></div><button class="cnbtn" onclick="changeMonth(1)">›</button></div>
+      <div class="cgrid" id="calDayHeaders"></div>
+      <div class="cgrid" id="calGrid"></div>
+    </div>
+    <div id="calEventsList"></div>
+  </div>
+</div>
+<!-- CHAT -->
+<div id="screenChat" class="screen hidden">
+  <div class="sub-hdr">
+    <div class="back-btn" onclick="goBack()">←</div>
+    <div style="display:flex;align-items:center;gap:8px;flex:1">
+      <div style="font-size:20px">🤖</div>
+      <div><div style="font-size:14px;font-weight:700">Luna AI</div><div style="font-size:10px;color:var(--text-muted)" id="chatStatusLabel">Init...</div></div>
+    </div>
+    <div class="hwav hidden" id="chatListenWave"><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div></div>
+  </div>
+  <div class="chat-msgs" id="chatMessages"></div>
+  <div class="chat-irow">
+    <button class="cmicb" id="chatMicBtn" onclick="toggleChatVoice()"><svg viewBox="0 0 24 24" fill="var(--neon-blue)" width="17" height="17"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3zM19 10v2a7 7 0 0 1-14 0v-2H3v2a9 9 0 0 0 8 8.94V23h2v-2.06A9 9 0 0 0 21 12v-2h-2z"/></svg></button>
+    <textarea class="cinput" id="chatInput" placeholder="Napiši poruku Luni..." rows="1" onkeydown="chatKD(event)" oninput="aResize(this)"></textarea>
+    <button class="csend" onclick="sendChat()"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
+  </div>
+</div>
+<!-- SETTINGS -->
+<div id="screenSettings" class="screen hidden">
+  <div class="sub-hdr"><div class="back-btn" onclick="goBack()">←</div><div class="sub-title">⚙️ Podešavanja</div></div>
+  <div class="lscroll">
+    <div class="ssec"><div class="sstitle">Tema</div><div class="scard"><div style="padding:7px 0"><div class="trow"><div class="topt tl" id="themeOptLight" onclick="setTheme('light')">☀️ Light</div><div class="topt td2 active" id="themeOptDark" onclick="setTheme('dark')">🌙 Dark</div><div class="topt ta" id="themeOptAmoled" onclick="setTheme('amoled')">⚫ AMOLED</div></div></div></div></div>
+    <div class="ssec"><div class="sstitle">AI API Ključevi</div><div class="scard"><div style="padding:9px 0">
+  <div class="ig">
+    <div class="ilbl" style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#fcd34d);display:inline-block;box-shadow:0 0 6px rgba(245,158,11,.5)"></span>Groq API Ključ</div>
+    <input type="password" class="ifield" id="groqApiKeyInput" placeholder="gsk_..." oninput="saveGroqKey()">
+  </div>
+  <div class="ig">
+    <div class="ilbl" style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,#1a73e8,#34a853);display:inline-block;box-shadow:0 0 6px rgba(52,168,83,.5)"></span>Gemini API Ključ</div>
+    <input type="password" class="ifield" id="geminiApiKeyInput" placeholder="AIza..." oninput="saveGroqKey()">
+  </div>
+  <div class="ig">
+    <div class="ilbl">Aktivni AI Model</div>
+    <select class="ifield" id="activeAISelect" onchange="saveGroqKey()">
+      <option value="auto">🤖 Auto (Gemini → Groq → Offline)</option>
+      <option value="groq">⚡ Samo Groq</option>
+      <option value="gemini">✨ Samo Gemini</option>
+    </select>
+  </div>
+  <div class="brow">
+    <button class="btn btn-s" onclick="testGroq()" id="testGroqBtn">🔗 Test veze</button>
+    <button class="btn btn-p" onclick="saveGroqKey()">💾 Sačuvaj</button>
+  </div>
+  <div id="groqTestResult" style="margin-top:7px;font-size:11px;text-align:center"></div>
+</div></div></div>
+    <div class="ssec"><div class="sstitle">Korisnik</div><div class="scard"><div style="padding:9px 0"><div class="ig"><div class="ilbl">Vaše ime</div><input type="text" class="ifield" id="userNameInput" placeholder="Saša" oninput="saveUserName()"></div></div></div></div>
+    <div class="ssec"><div class="sstitle">Glasovne Funkcije</div><div class="scard">
+      <div class="tog-row"><div><div class="tog-lbl">Glasovni Pozdrav</div><div class="tog-sub">Luna pozdravlja pri pokretanju</div></div><div class="tog on" id="toggleGreeting" onclick="togSet('greeting',this)"></div></div>
+      <div class="tog-row"><div><div class="tog-lbl">Glasovni Odgovori</div><div class="tog-sub">Luna govori odgovore</div></div><div class="tog on" id="toggleTTS" onclick="togSet('tts',this)"></div></div>
+      <div class="tog-row"><div><div class="tog-lbl">Glasovne Notifikacije</div><div class="tog-sub">Alarmi i podsetnici glasom</div></div><div class="tog on" id="toggleVoiceNotif" onclick="togSet('voiceNotif',this)"></div></div>
+    </div></div>
+    <div class="ssec"><div class="sstitle">🎛️ 3D Control Panel</div><div class="scard" style="padding:0 13px"><div id="cpPanels"></div></div></div>
+    <div class="ssec"><div class="sstitle">Podaci</div><div class="scard"><div style="padding:9px 0"><div class="brow" style="margin-bottom:8px"><button class="btn btn-s" onclick="exportData()">📤 Export</button><button class="btn btn-s" onclick="importData()">📥 Import</button></div><button class="btn btn-d" onclick="confirmClear()">🗑️ Obriši sve podatke</button></div></div></div>
+    <div class="ssec"><div class="sstitle">Status Sistema</div><div class="scard"><div style="padding:9px 0;display:flex;flex-wrap:wrap;gap:5px" id="fullStatusPanel"></div></div></div>
+  </div>
+</div>
+
+<!-- MODALS -->
+<div class="moverlay hidden" id="addNoteModal"><div class="msheet"><div class="mhandle"></div><div class="mtitle" id="noteModalTitle">Nova Beleška</div><input type="hidden" id="editNoteId"><div class="ig"><div class="ilbl">Naslov</div><input type="text" class="ifield" id="noteTitle" placeholder="Naslov..."></div><div class="ig"><div class="ilbl">Sadržaj</div><textarea class="ifield" id="noteContent" placeholder="Beleška..." rows="4"></textarea></div><div class="ig"><div class="ilbl">Podsetnik</div><input type="datetime-local" class="ifield" id="noteReminder"></div><div class="brow"><button class="btn btn-s" onclick="closeModal('addNoteModal')">Otkaži</button><button class="btn btn-p" onclick="saveNote()">💾 Sačuvaj</button></div></div></div>
+<div class="moverlay hidden" id="addAlarmModal"><div class="msheet"><div class="mhandle"></div><div class="mtitle" id="alarmModalTitle">Novi Alarm</div><input type="hidden" id="editAlarmId"><div class="ig"><div class="ilbl">Naziv</div><input type="text" class="ifield" id="alarmLabel" placeholder="Jutarnji alarm..."></div><div class="ig"><div class="ilbl">Vreme</div><input type="time" class="ifield" id="alarmTime" value="07:00"></div><div class="ig"><div class="ilbl">Ponavljanje</div><select class="ifield" id="alarmRepeat"><option value="once">Jednom</option><option value="daily">Svaki dan</option><option value="weekdays">Radni dani</option><option value="weekends">Vikend</option></select></div><div class="brow"><button class="btn btn-s" onclick="closeModal('addAlarmModal')">Otkaži</button><button class="btn btn-p" onclick="saveAlarm()">⏰ Postavi</button></div></div></div>
+<div class="moverlay hidden" id="addTaskModal"><div class="msheet"><div class="mhandle"></div><div class="mtitle" id="taskModalTitle">Novi Zadatak</div><input type="hidden" id="editTaskId"><div class="ig"><div class="ilbl">Zadatak</div><input type="text" class="ifield" id="taskTitle" placeholder="Opis..."></div><div class="ig"><div class="ilbl">Napomena</div><textarea class="ifield" id="taskNote" placeholder="Detalji..." rows="2"></textarea></div><div class="ig"><div class="ilbl">Rok</div><input type="datetime-local" class="ifield" id="taskDeadline"></div><div class="ig"><div class="ilbl">Prioritet</div><div class="psel" id="taskPrioritySelect"><div class="popt high selected" onclick="selPri('high')">🔴 Visok</div><div class="popt medium" onclick="selPri('medium')">🟡 Srednji</div><div class="popt low" onclick="selPri('low')">🟢 Nizak</div></div><input type="hidden" id="taskPriority" value="high"></div><div class="brow"><button class="btn btn-s" onclick="closeModal('addTaskModal')">Otkaži</button><button class="btn btn-p" onclick="saveTask()">✅ Sačuvaj</button></div></div></div>
+<div class="moverlay hidden" id="addReminderModal"><div class="msheet"><div class="mhandle"></div><div class="mtitle" id="reminderModalTitle">Novi Podsetnik</div><input type="hidden" id="editReminderId"><div class="ig"><div class="ilbl">Naslov</div><input type="text" class="ifield" id="reminderTitle" placeholder="Kupi mleko..."></div><div class="ig"><div class="ilbl">Sadržaj</div><textarea class="ifield" id="reminderContent" placeholder="Detalji..." rows="2"></textarea></div><div class="ig"><div class="ilbl">Datum i vreme</div><input type="datetime-local" class="ifield" id="reminderDateTime"></div><div class="brow"><button class="btn btn-s" onclick="closeModal('addReminderModal')">Otkaži</button><button class="btn btn-p" onclick="saveReminder()">🔔 Postavi</button></div></div></div>
+<div class="moverlay hidden" id="addEventModal"><div class="msheet"><div class="mhandle"></div><div class="mtitle">Novi Događaj</div><div class="ig"><div class="ilbl">Naslov</div><input type="text" class="ifield" id="eventTitle" placeholder="Naziv..."></div><div class="ig"><div class="ilbl">Datum i vreme</div><input type="datetime-local" class="ifield" id="eventDateTime"></div><div class="ig"><div class="ilbl">Opis</div><textarea class="ifield" id="eventDesc" placeholder="Opis..." rows="2"></textarea></div><div class="brow"><button class="btn btn-s" onclick="closeModal('addEventModal')">Otkaži</button><button class="btn btn-p" onclick="saveEvent()">📅 Sačuvaj</button></div></div></div>
+</div><!-- #app -->
+<div class="toast" id="toast"></div>
+
+<script>
+'use strict';
+// ---- 3D CONTROL PANEL ----
+const CP=[
+  {id:'geo',t:'3D Geometry',v:[['p3d-height','3D Height'],['p3d-depth','3D Depth'],['p3d-thickness','3D Thickness'],['p3d-extrusion','3D Extrusion'],['p3d-perspective','Perspective Strength'],['p3d-persp-dist','Perspective Distance'],['p3d-curvature','Surface Curvature'],['p3d-corner','Corner Roundness'],['p3d-edge-thick','Edge Thickness'],['p3d-layer-sep','Layer Separation'],['p3d-float-height','Floating Height'],['p3d-float-dist','Floating Distance']]},
+  {id:'shd',t:'Shadows',v:[['p3d-shadow-depth','Shadow Depth'],['p3d-shadow-dist','Shadow Distance'],['p3d-shadow-soft','Shadow Softness'],['p3d-shadow-opac','Shadow Opacity'],['p3d-inner-shadow','Inner Shadow'],['p3d-outer-shadow','Outer Shadow'],['p3d-multi-shadow','Multi Layer Shadow'],['p3d-ao','Ambient Occlusion'],['p3d-depth-enh','Depth Enhancement']]},
+  {id:'gls',t:'Glass Effects',v:[['p3d-glass-trans','Glass Transparency'],['p3d-glass-blur','Glass Blur'],['p3d-glass-refl','Glass Reflection'],['p3d-glass-edge','Glass Edge Brightness'],['p3d-glass-depth','Glass Depth'],['p3d-glass-thick','Glass Thickness'],['p3d-crystal','Crystal Effect'],['p3d-premium-glass','Premium Glass Mode']]},
+  {id:'rfl',t:'Reflections',v:[['p3d-refl-str','Reflection Strength'],['p3d-refl-width','Reflection Width'],['p3d-refl-angle','Reflection Angle'],['p3d-highlight','Highlight Intensity'],['p3d-shine','Surface Shine'],['p3d-metallic','Metallic Reflection'],['p3d-dyn-refl','Dynamic Reflection'],['p3d-specular','Specular Reflection']]},
+  {id:'led',t:'LED & Lighting',v:[['p3d-glow-int','Glow Intensity'],['p3d-glow-rad','Glow Radius'],['p3d-glow-soft','Glow Softness'],['p3d-blue-amb','Blue Ambient Light'],['p3d-purple-amb','Purple Ambient Light'],['p3d-white-acc','White Accent Light'],['p3d-edge-light','Edge Lighting'],['p3d-halo','Halo Effect'],['p3d-neon','Neon Effect'],['p3d-bloom','Light Bloom'],['p3d-scatter','Light Scatter'],['p3d-volumetric','Volumetric Light']]},
+  {id:'lev',t:'Levitation',v:[['p3d-float-str','Floating Strength'],['p3d-hover-lift','Hover Lift'],['p3d-hover-depth','Hover Depth'],['p3d-hover-anim','Hover Animation'],['p3d-hover-persp','Hover Perspective'],['p3d-hover-shadow','Hover Shadow Boost']]},
+  {id:'par',t:'Parallax',v:[['p3d-bg-depth','Background Depth'],['p3d-card-depth','Card Depth'],['p3d-icon-depth-p','Icon Depth'],['p3d-mic-depth-p','Microphone Depth'],['p3d-tilt','Tilt Effect'],['p3d-motion','Motion Depth'],['p3d-persp-motion','Perspective Motion']]},
+  {id:'ico',t:'3D Icons',v:[['p3d-icon-depth','Icon Depth'],['p3d-icon-thick','Icon Thickness'],['p3d-icon-refl','Icon Reflection'],['p3d-icon-shadow','Icon Shadow'],['p3d-icon-glow','Icon Glow'],['p3d-icon-elev','Icon Elevation']]},
+  {id:'mic',t:'Microphone 3D',v:[['p3d-btn-depth','Button Depth'],['p3d-btn-thick','Button Thickness'],['p3d-mic-elev','Microphone Elevation'],['p3d-pulse-glow','Pulse Glow'],['p3d-outer-glow','Outer Glow'],['p3d-ring-thick','Ring Thickness'],['p3d-ring-refl','Ring Reflection'],['p3d-ring-bright','Ring Brightness']]},
+  {id:'nav',t:'Navigation 3D',v:[['p3d-nav-depth','Navigation Depth'],['p3d-nav-thick','Navigation Thickness'],['p3d-nav-refl','Navigation Reflection'],['p3d-nav-shadow','Navigation Shadow'],['p3d-nav-glow','Navigation Glow']]},
+  {id:'ani',t:'Animations',v:[['p3d-anim-smooth','Animation Smoothness'],['p3d-anim-speed','Animation Speed'],['p3d-spring','Spring Strength'],['p3d-hover-lift','Hover Lift'],['p3d-click-comp','Click Compression'],['p3d-trans-qual','Transition Quality'],['p3d-motion-sm','Motion Smoothness']]},
+  {id:'mst',t:'⭐ Master Premium',v:[['p3d-ultra3d','Ultra 3D Mode'],['p3d-premium-boost','Premium Depth Boost'],['p3d-luxury','Luxury Mode'],['p3d-future-tech','Future Tech Mode'],['p3d-cinematic','Cinematic Lighting'],['p3d-realistic-mat','Realistic Material'],['p3d-phys-light','Physical Light Sim'],['p3d-adv-shadow','Advanced Shadow Engine'],['p3d-adv-refl','Advanced Reflection Engine'],['p3d-ultra-glass','Ultra Glass Mode'],['p3d-wow','WOW Factor']]},
+];
+function buildCP(){
+  document.getElementById('cpPanels').innerHTML=CP.map(p=>`
+    <div><div class="cph" onclick="togCP('${p.id}')"><div class="cpht">${p.t}</div><div class="cpar" id="cpar-${p.id}">▼</div></div>
+    <div class="cpb" id="cpb-${p.id}">${p.v.map(([id,lbl])=>{
+      const v=parseFloat(localStorage.getItem('cp_'+id)||50);
+      return `<div class="slr"><div class="slrow"><span class="sllbl">${lbl}</span><span class="slval" id="sv-${id}">${v}</span></div><input type="range" min="0" max="100" step="1" value="${v}" oninput="cpCh('${id}',this.value)"></div>`;
+    }).join('')}</div></div>`).join('');
+}
+function togCP(id){
+  document.getElementById('cpb-'+id).classList.toggle('open');
+  document.getElementById('cpar-'+id).classList.toggle('open');
+}
+function cpCh(id,val){
+  const v=parseFloat(val);
+  document.getElementById('sv-'+id).textContent=v;
+  document.documentElement.style.setProperty('--'+id,v);
+  localStorage.setItem('cp_'+id,v);
+}
+function loadCP(){
+  CP.forEach(p=>p.v.forEach(([id])=>{
+    const v=parseFloat(localStorage.getItem('cp_'+id)||50);
+    document.documentElement.style.setProperty('--'+id,v);
+  }));
+}
+
+// ---- STATE ----
+let db,curScr='screenHome',scrHist=['screenHome'],rec=null,synth=window.speechSynthesis;
+let isListening=false,curPers='smart',groqKey='',geminiKey='',activeAI='auto',uName='Saša';
+let isOnline=navigator.onLine,groqOK=false,geminiOK=false,alarmTick=null,calDate=new Date();
+let settings={greeting:true,tts:true,voiceNotif:true},activeAlarm=null,alarmInt=null,chatHist=[];
+const PERS={
+  smart:{name:'Pametna',prompt:'Ti si Luna, pametna AI sekretarica. Odgovaraj precizno na srpskom.'},
+  funny:{name:'Šaljiva',prompt:'Ti si Luna, šaljiva AI sekretarica. Odgovaraj sa humorom na srpskom. Koristi emoji.'},
+  oracle:{name:'Sveznalica',prompt:'Ti si Luna, tajanstvena AI sekretarica. Odgovaraj filozofski na srpskom.'},
+  business:{name:'Poslovna',prompt:'Ti si Luna, profesionalna AI sekretarica. Odgovaraj formalno na srpskom.'},
+  friendly:{name:'Prijateljska',prompt:'Ti si Luna, prijateljska AI sekretarica. Odgovaraj srdačno na srpskom.'},
+};
+
+// ---- DB ----
+function initDB(){return new Promise((res,rej)=>{const r=indexedDB.open('LunaAI',3);r.onupgradeneeded=e=>{const d=e.target.result;['notes','alarms','tasks','reminders','events'].forEach(s=>{if(!d.objectStoreNames.contains(s))d.createObjectStore(s,{keyPath:'id'});});};r.onsuccess=e=>{db=e.target.result;res(db);};r.onerror=rej;});}
+function dbG(s,id){return new Promise((res,rej)=>{const tx=db.transaction(s,'readonly');const r=id?tx.objectStore(s).get(id):tx.objectStore(s).getAll();r.onsuccess=()=>res(r.result);r.onerror=rej;});}
+function dbP(s,d){return new Promise((res,rej)=>{const tx=db.transaction(s,'readwrite');tx.objectStore(s).put(d).onsuccess=res;tx.onerror=rej;});}
+function dbD(s,id){return new Promise((res,rej)=>{const tx=db.transaction(s,'readwrite');tx.objectStore(s).delete(id).onsuccess=res;tx.onerror=rej;});}
+
+// ---- NAV ----
+function showScreen(id){if(curScr===id)return;const p=document.getElementById(curScr),n=document.getElementById(id);if(!n)return;p.classList.add('slide-left');n.classList.remove('hidden','slide-left');if(scrHist[0]!=='screenHome')scrHist=['screenHome'];scrHist.push(id);curScr=id;setTimeout(()=>{p.classList.add('hidden');p.classList.remove('slide-left');},360);onEnter(id);}
+function goBack(){const fallback='screenHome';if(scrHist.length<=1){const c=document.getElementById(curScr),h=document.getElementById(fallback);c.classList.add('hidden');h.classList.remove('hidden','slide-left');curScr=fallback;scrHist=['screenHome'];onEnter(fallback);return;}scrHist.pop();const p=scrHist[scrHist.length-1]||fallback;document.getElementById(curScr).classList.add('hidden');const t=document.getElementById(p);t.classList.remove('hidden','slide-left');curScr=p;onEnter(p);}
+function navTo(id,btn){document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');if(curScr===id)return;const p=document.getElementById(curScr),n=document.getElementById(id);if(!n)return;p.classList.add('slide-left');n.classList.remove('hidden','slide-left');scrHist=[id];curScr=id;setTimeout(()=>{p.classList.add('hidden');p.classList.remove('slide-left');},360);onEnter(id);}
+function onEnter(id){switch(id){case'screenHome':dash();break;case'screenNotes':renderNotes();break;case'screenAlarms':renderAlarms();break;case'screenTasks':renderTasks();break;case'screenReminders':renderReminders();break;case'screenCalendar':renderCal();break;case'screenSettings':loadSettUI();break;case'screenChat':updChatSt();break;}}
+
+// ---- MODALS ----
+function openModal(id){const m=document.getElementById(id);m.classList.remove('hidden');m.querySelectorAll('input:not([type=hidden]):not([type=range]),textarea,select').forEach(el=>{if(el.type!=='datetime-local'&&el.type!=='time'&&el.tagName!=='SELECT')el.value='';});const h=m.querySelector('input[type=hidden]');if(h)h.value='';if(id==='addTaskModal'){selPri('high');document.getElementById('taskModalTitle').textContent='Novi Zadatak';}if(id==='addNoteModal')document.getElementById('noteModalTitle').textContent='Nova Beleška';if(id==='addAlarmModal')document.getElementById('alarmModalTitle').textContent='Novi Alarm';if(id==='addReminderModal')document.getElementById('reminderModalTitle').textContent='Novi Podsetnik';}
+function closeModal(id){document.getElementById(id).classList.add('hidden');}
+document.querySelectorAll('.moverlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.add('hidden');}));
+
+// ---- NOTES ----
+async function saveNote(){const id=document.getElementById('editNoteId').value||Date.now().toString();const t=document.getElementById('noteTitle').value.trim();const c=document.getElementById('noteContent').value.trim();if(!t&&!c){toast('Unesite sadržaj');return;}await dbP('notes',{id,title:t||'Bez naslova',content:c,reminder:document.getElementById('noteReminder').value,created:Date.now()});closeModal('addNoteModal');renderNotes();dash();toast('✅ Beleška sačuvana');}
+async function renderNotes(filter=''){const list=document.getElementById('notesList');let notes=await dbG('notes');if(filter)notes=notes.filter(n=>n.title.toLowerCase().includes(filter)||n.content.toLowerCase().includes(filter));notes.sort((a,b)=>b.created-a.created);if(!notes.length){list.innerHTML='<div class="empty"><div class="ei">📋</div><p>Nema beleški. Dodajte prvu!</p></div>';return;}list.innerHTML=notes.map(n=>`<div class="li" onclick="editNote('${n.id}')"><div class="lico">📋</div><div class="lb"><div class="it">${esc(n.title)}</div><div class="is">${esc(n.content.substring(0,55))}${n.content.length>55?'...':''}</div><div class="im"><span class="tag">${fd(n.created)}</span>${n.reminder?`<span class="tag">🔔 ${fdt(n.reminder)}</span>`:''}</div></div><div class="lia"><button class="ibtn" onclick="event.stopPropagation();speakNote('${n.id}')">🔊</button><button class="ibtn" onclick="event.stopPropagation();del('notes','${n.id}',renderNotes)">🗑️</button></div></div>`).join('');}
+async function editNote(id){const n=await dbG('notes',id);if(!n)return;document.getElementById('editNoteId').value=n.id;document.getElementById('noteTitle').value=n.title;document.getElementById('noteContent').value=n.content;document.getElementById('noteReminder').value=n.reminder||'';document.getElementById('noteModalTitle').textContent='Uredi Belešku';document.getElementById('addNoteModal').classList.remove('hidden');}
+async function speakNote(id){const n=await dbG('notes',id);if(n)speak(`${n.title}. ${n.content}`);}
+
+// ---- ALARMS ----
+async function saveAlarm(){const id=document.getElementById('editAlarmId').value||Date.now().toString();const lbl=document.getElementById('alarmLabel').value.trim()||'Alarm';const t=document.getElementById('alarmTime').value;if(!t){toast('Unesite vreme');return;}await dbP('alarms',{id,label:lbl,time:t,repeat:document.getElementById('alarmRepeat').value,active:true,created:Date.now()});closeModal('addAlarmModal');renderAlarms();dash();toast(`⏰ Alarm: ${t}`);}
+async function renderAlarms(){const list=document.getElementById('alarmsList');const al=await dbG('alarms');al.sort((a,b)=>a.time.localeCompare(b.time));if(!al.length){list.innerHTML='<div class="empty"><div class="ei">🔔</div><p>Nema alarma.</p></div>';return;}list.innerHTML=al.map(a=>`<div class="li"><div class="lico">${a.active?'⏰':'🔕'}</div><div class="lb"><div class="it">${esc(a.label)}</div><div class="is" style="font-size:20px;font-weight:700;color:var(--text-w)">${a.time}</div><div class="im"><span class="tag">${rLbl(a.repeat)}</span>${a.active?'<span class="tag done">Aktivan</span>':'<span class="tag urgent">Neaktivan</span>'}</div></div><div class="lia"><div class="tog ${a.active?'on':''}" onclick="togAlarm('${a.id}')"></div><button class="ibtn" onclick="del('alarms','${a.id}',renderAlarms)">🗑️</button></div></div>`).join('');}
+async function togAlarm(id){const a=await dbG('alarms',id);if(!a)return;a.active=!a.active;await dbP('alarms',a);renderAlarms();toast(a.active?'⏰ Aktivan':'🔕 Deaktiviran');}
+function rLbl(r){return{once:'Jednom',daily:'Svaki dan',weekdays:'Radni dani',weekends:'Vikend'}[r]||r;}
+
+// ---- TASKS ----
+function selPri(p){document.querySelectorAll('.popt').forEach(e=>e.classList.remove('selected'));document.querySelector(`.popt.${p}`)?.classList.add('selected');document.getElementById('taskPriority').value=p;}
+async function saveTask(){const id=document.getElementById('editTaskId').value||Date.now().toString();const t=document.getElementById('taskTitle').value.trim();if(!t){toast('Unesite zadatak');return;}await dbP('tasks',{id,title:t,note:document.getElementById('taskNote').value.trim(),deadline:document.getElementById('taskDeadline').value,priority:document.getElementById('taskPriority').value,done:false,created:Date.now()});closeModal('addTaskModal');renderTasks();dash();toast('✅ Zadatak sačuvan');}
+async function renderTasks(){const list=document.getElementById('tasksList');const tasks=await dbG('tasks');const s=[...tasks].sort((a,b)=>{if(a.done!==b.done)return a.done?1:-1;return({high:0,medium:1,low:2}[a.priority]||1)-({high:0,medium:1,low:2}[b.priority]||1);});if(!s.length){list.innerHTML='<div class="empty"><div class="ei">✅</div><p>Nema zadataka.</p></div>';return;}list.innerHTML=s.map(t=>`<div class="li ${t.done?'done':''}"><div class="pbar ${t.priority}"></div><div class="lico" onclick="togTask('${t.id}')" style="cursor:pointer">${t.done?'✅':'⬜'}</div><div class="lb"><div class="it">${esc(t.title)}</div>${t.note?`<div class="is">${esc(t.note)}</div>`:''}<div class="im"><span class="tag ${t.priority==='high'?'urgent':t.priority==='low'?'done':''}">${pLbl(t.priority)}</span>${t.deadline?`<span class="tag">📅 ${fdt(t.deadline)}</span>`:''}</div></div><div class="lia"><button class="ibtn" onclick="del('tasks','${t.id}',renderTasks)">🗑️</button></div></div>`).join('');}
+async function togTask(id){const t=await dbG('tasks',id);if(!t)return;t.done=!t.done;await dbP('tasks',t);renderTasks();dash();}
+function pLbl(p){return{high:'🔴 Visok',medium:'🟡 Srednji',low:'🟢 Nizak'}[p]||p;}
+
+// ---- REMINDERS ----
+async function saveReminder(){const id=document.getElementById('editReminderId').value||Date.now().toString();const t=document.getElementById('reminderTitle').value.trim();if(!t){toast('Unesite naslov');return;}await dbP('reminders',{id,title:t,content:document.getElementById('reminderContent').value.trim(),datetime:document.getElementById('reminderDateTime').value,fired:false,created:Date.now()});closeModal('addReminderModal');renderReminders();dash();toast('🔔 Podsetnik postavljen');}
+async function renderReminders(){const list=document.getElementById('remindersList');const r=await dbG('reminders');r.sort((a,b)=>(!a.datetime?1:!b.datetime?-1:new Date(a.datetime)-new Date(b.datetime)));if(!r.length){list.innerHTML='<div class="empty"><div class="ei">⏰</div><p>Nema podsetnika.</p></div>';return;}list.innerHTML=r.map(x=>`<div class="li ${x.fired?'done':''}"><div class="lico">🔔</div><div class="lb"><div class="it">${esc(x.title)}</div>${x.content?`<div class="is">${esc(x.content)}</div>`:''}<div class="im">${x.datetime?`<span class="tag">📅 ${fdt(x.datetime)}</span>`:''}${x.fired?'<span class="tag done">Okinut</span>':''}</div></div><div class="lia"><button class="ibtn" onclick="spkRem('${x.id}')">🔊</button><button class="ibtn" onclick="del('reminders','${x.id}',renderReminders)">🗑️</button></div></div>`).join('');}
+async function spkRem(id){const r=await dbG('reminders',id);if(r)speak(`${uName}, podsetnik: ${r.title}. ${r.content||''}`);}
+
+// ---- EVENTS ----
+async function saveEvent(){const id=Date.now().toString();const t=document.getElementById('eventTitle').value.trim();if(!t){toast('Unesite naslov');return;}await dbP('events',{id,title:t,datetime:document.getElementById('eventDateTime').value,desc:document.getElementById('eventDesc').value.trim(),created:Date.now()});closeModal('addEventModal');renderCal();toast('📅 Događaj sačuvan');}
+async function renderCal(){const hr=document.getElementById('calDayHeaders'),gr=document.getElementById('calGrid'),lbl=document.getElementById('calMonthLabel');const days=['Ned','Pon','Uto','Sre','Čet','Pet','Sub'];hr.innerHTML=days.map(d=>`<div class="cdh">${d}</div>`).join('');const yr=calDate.getFullYear(),mo=calDate.getMonth();const mos=['Januar','Februar','Mart','April','Maj','Jun','Jul','Avgust','Septembar','Oktobar','Novembar','Decembar'];lbl.textContent=`${mos[mo]} ${yr}`;const ev=await dbG('events');const evD=new Set(ev.filter(e=>e.datetime).map(e=>e.datetime.substring(0,10)));const fd1=new Date(yr,mo,1).getDay(),dim=new Date(yr,mo+1,0).getDate(),today=new Date();let h='';for(let i=0;i<fd1;i++)h+=`<div class="cd other">${new Date(yr,mo,-fd1+i+1).getDate()}</div>`;for(let d=1;d<=dim;d++){const ds=`${yr}-${String(mo+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;const iT=today.getFullYear()===yr&&today.getMonth()===mo&&today.getDate()===d;h+=`<div class="cd ${iT?'today':''} ${evD.has(ds)?'has-ev':''}" onclick="selCalDay('${ds}')">${d}</div>`;}gr.innerHTML=h;const tds=`${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;const tEv=ev.filter(e=>e.datetime&&e.datetime.startsWith(tds));const eL=document.getElementById('calEventsList');eL.innerHTML=tEv.length?tEv.map(e=>`<div class="li"><div class="lico">📅</div><div class="lb"><div class="it">${esc(e.title)}</div><div class="is">${e.datetime?fdt(e.datetime):''}</div></div><button class="ibtn" onclick="del('events','${e.id}',renderCal)">🗑️</button></div>`).join(''):'<div class="empty" style="padding:18px"><p>Nema događaja danas</p></div>';}
+function changeMonth(d){calDate.setMonth(calDate.getMonth()+d);renderCal();}
+async function selCalDay(ds){const ev=await dbG('events');const d=ev.filter(e=>e.datetime&&e.datetime.startsWith(ds));document.getElementById('calEventsList').innerHTML=d.length?d.map(e=>`<div class="li"><div class="lico">📅</div><div class="lb"><div class="it">${esc(e.title)}</div><div class="is">${e.desc||''}</div></div><button class="ibtn" onclick="del('events','${e.id}',renderCal)">🗑️</button></div>`).join(''):`<div class="empty" style="padding:18px"><p>Nema za ${ds}</p></div>`;}
+
+// ---- DASHBOARD ----
+async function dash(){const [notes,alarms,tasks,reminders,events]=await Promise.all([dbG('notes'),dbG('alarms'),dbG('tasks'),dbG('reminders'),dbG('events')]);const aT=tasks.filter(t=>!t.done).length,aA=alarms.filter(a=>a.active).length,aR=reminders.filter(r=>!r.fired).length;document.getElementById('notesCount').textContent=notes.length;document.getElementById('alarmsCount').textContent=aA;document.getElementById('tasksCount').textContent=aT;document.getElementById('notesStat').textContent=`${notes.length} beleški`;document.getElementById('alarmsStat').textContent=`${aA} aktivnih`;document.getElementById('tasksStatL').textContent=`${aT} aktivnih`;const today=new Date();const dys=['Ned','Pon','Uto','Sri','Čet','Pet','Sub'];document.getElementById('plannerSub').textContent=`${dys[today.getDay()]}, ${today.getDate()}.${today.getMonth()+1}`;const tds=`${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;const tEv=events.filter(e=>e.datetime&&e.datetime.startsWith(tds));// Populate aktuelno with notes + events + reminders
+const aktItems=[];
+// Show last 5 notes
+const recentNotes=notes.slice().sort((a,b)=>b.created-a.created).slice(0,5);
+recentNotes.forEach(n=>{aktItems.push(`<div class="ak-item" onclick="showScreen('screenNotes')"><span class="ak-emoji">📋</span><span class="ak-text">${esc(n.title)}</span></div>`);});
+// Today's events
+tEv.slice(0,2).forEach(e=>{aktItems.push(`<div class="ak-item" onclick="showScreen('screenCalendar')"><span class="ak-emoji">📅</span><span class="ak-text">${esc(e.title)}</span><span class="ak-time">${fdt(e.datetime).split(' ')[1]||''}</span></div>`);});
+// Next alarm
+const nA=alarms.filter(a=>a.active).sort((a,b)=>a.time.localeCompare(b.time))[0];
+if(nA)aktItems.push(`<div class="ak-item" onclick="showScreen('screenAlarms')"><span class="ak-emoji">⏰</span><span class="ak-text">${nA.time} – ${esc(nA.label)}</span></div>`);
+// Next reminder
+const nR=reminders.filter(r=>!r.fired&&r.datetime).sort((a,b)=>new Date(a.datetime)-new Date(b.datetime))[0];
+if(nR)aktItems.push(`<div class="ak-item" onclick="showScreen('screenReminders')"><span class="ak-emoji">🔔</span><span class="ak-text">${esc(nR.title)}</span></div>`);
+document.getElementById('aktuelnoItems').innerHTML=aktItems.length?aktItems.join(''):'<div class="ak-item"><span class="ak-emoji">✨</span><span class="ak-text">Nema obaveza danas</span></div>';
+// Update right mini cards
+const tcR=document.getElementById('tasksCountR');if(tcR)tcR.textContent=aT;
+const tsR=document.getElementById('tasksStatR');if(tsR)tsR.textContent=`${aT} aktivnih`;
+const rsR=document.getElementById('remindersStatR');if(rsR)rsR.textContent=`${aR} aktivnih`;}
+
+// ---- ALARM CHECKER ----
+function startChecker(){alarmTick=setInterval(async()=>{if(!db)return;const now=new Date();const ts=`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;const al=await dbG('alarms');for(const a of al){if(!a.active)continue;if(a.time===ts&&now.getSeconds()<5&&!activeAlarm)trigAlarm(a);}const rem=await dbG('reminders');for(const r of rem){if(r.fired||!r.datetime)continue;if(Math.abs(now-new Date(r.datetime))<30000){r.fired=true;await dbP('reminders',r);if(settings.voiceNotif)speak(`${uName}, podsetnik: ${r.title}. ${r.content||''}`);toast(`🔔 ${r.title}`);notif(r.title,r.content||'Podsetnik');if(curScr==='screenReminders')renderReminders();}}const notes=await dbG('notes');for(const n of notes){if(!n.reminder||n.reminderFired)continue;if(Math.abs(now-new Date(n.reminder))<30000){n.reminderFired=true;await dbP('notes',n);if(settings.voiceNotif)speak(`${uName}, beleška: ${n.title}`);toast(`📋 ${n.title}`);}}},5000);}
+function trigAlarm(a){activeAlarm=a;document.getElementById('alarmActiveName').textContent=a.label;document.getElementById('alarmActiveTime').textContent=a.time;document.getElementById('alarmActiveScreen').classList.remove('hidden');playBeep();if(settings.voiceNotif)setTimeout(()=>speak(`${uName}, alarm: ${a.label}`),800);notif(`Alarm: ${a.label}`,a.time);}
+function playBeep(){try{const ctx=new AudioContext();[880,660,880,660].forEach((f,i)=>{const o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=f;g.gain.setValueAtTime(.3,ctx.currentTime+i*.5);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+i*.5+.45);o.start(ctx.currentTime+i*.5);o.stop(ctx.currentTime+i*.5+.5);});alarmInt=setInterval(()=>{try{const c=new AudioContext(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=880;g.gain.setValueAtTime(.3,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.4);o.start();o.stop(c.currentTime+.4);}catch(e){}},2000);}catch(e){}}
+function dismissAlarm(){document.getElementById('alarmActiveScreen').classList.add('hidden');if(alarmInt){clearInterval(alarmInt);alarmInt=null;}if(activeAlarm){if(activeAlarm.repeat==='once'){activeAlarm.active=false;dbP('alarms',activeAlarm);}speak(`Alarm ${activeAlarm.label} ugašen.`);activeAlarm=null;}}
+function snoozeAlarm(){if(alarmInt){clearInterval(alarmInt);alarmInt=null;}document.getElementById('alarmActiveScreen').classList.add('hidden');const a=activeAlarm;activeAlarm=null;speak('Odložen za 5 minuta.');setTimeout(()=>{if(a)trigAlarm(a);},5*60*1000);}
+
+// ---- VOICE ----
+function speak(t,cb){if(!settings.tts||!synth)return;synth.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='sr-RS';u.rate=.95;u.pitch=1.1;const v=synth.getVoices();const sv=v.find(x=>x.lang.startsWith('sr'))||v.find(x=>x.lang.startsWith('hr'))||v.find(x=>x.lang.startsWith('en'));if(sv)u.voice=sv;u.onend=()=>{if(cb)cb();};synth.speak(u);}
+function initSR(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return null;const r=new SR();r.continuous=false;r.interimResults=false;r.lang='sr-RS';r.onstart=()=>{isListening=true;document.getElementById('mainMicBtn').classList.add('listening');document.getElementById('micLabel').textContent='SLUŠAM...';document.getElementById('listenWave').classList.remove('hidden');};r.onend=()=>{isListening=false;document.getElementById('mainMicBtn').classList.remove('listening');document.getElementById('micLabel').textContent='DODIRNI I KAŽI KOMANDU';document.getElementById('listenWave').classList.add('hidden');};r.onresult=e=>procVoice(e.results[0][0].transcript);r.onerror=e=>{isListening=false;document.getElementById('mainMicBtn').classList.remove('listening');document.getElementById('micLabel').textContent='DODIRNI I KAŽI KOMANDU';document.getElementById('listenWave').classList.add('hidden');if(e.error!=='no-speech')toast('Greška: '+e.error);};return r;}
+function toggleVoiceInput(){if(!rec){rec=initSR();if(!rec){toast('Speech Recognition nije podržan');return;}}if(isListening)rec.stop();else{try{rec.start();}catch(e){rec=initSR();try{rec.start();}catch(e2){}}};}
+async function procVoice(text){
+  const l=text.toLowerCase();
+  toast(`🎤 "${text}"`);
+  // Navigation commands
+  if((l.includes('otvori')||l.includes('prikaži')||l.includes('idi na'))&&l.includes('beleške')){showScreen('screenNotes');speak('Otvaranje beleški');return;}
+  if((l.includes('otvori')||l.includes('prikaži')||l.includes('idi na'))&&l.includes('alarm')){showScreen('screenAlarms');speak('Otvaranje alarma');return;}
+  if((l.includes('otvori')||l.includes('prikaži')||l.includes('idi na'))&&(l.includes('zadatak')||l.includes('zadaci'))){showScreen('screenTasks');speak('Otvaranje zadataka');return;}
+  if((l.includes('otvori')||l.includes('prikaži')||l.includes('idi na'))&&l.includes('podsetnik')){showScreen('screenReminders');speak('Otvaranje podsetnika');return;}
+  if((l.includes('otvori')||l.includes('prikaži'))&&(l.includes('kalendar')||l.includes('planer'))){showScreen('screenCalendar');speak('Otvaranje kalendara');return;}
+  if((l.includes('otvori')||l.includes('prikaži'))&&(l.includes('podešavanja')||l.includes('opcije'))){showScreen('screenSettings');speak('Otvaranje podešavanja');return;}
+  if(l.includes('početna')||l.includes('početak')||l.includes('nazad')){showScreen('screenHome');speak('Početna');return;}
+  // Smart AI processing
+  await lunaSmartProcess(text);
+}
+
+async function lunaSmartProcess(text){
+  showToastLong(`🧠 Analiziram...`);
+  const now=new Date();
+  const sysPrompt=`Si Luna, pametna glasovna sekretarica. Korisnik ti govori prirodnim srpskim jezikom. 
+Tvoj zadatak je da iz rečenice AUTOMATSKI prepoznaš šta treba kreirati i vratiš JSON.
+
+Trenutno vreme: ${now.toLocaleTimeString('sr-RS',{hour:'2-digit',minute:'2-digit'})}
+Trenutni datum: ${now.toLocaleDateString('sr-RS')} (${['Nedjelja','Ponedeljak','Utorak','Srijeda','Četvrtak','Petak','Subota'][now.getDay()]})
+
+Primeri razumevanja:
+"Probudi me sutra u 7" → alarm 07:00 sutra
+"Podseti me da kupim hleb večeras u 18" → podsetnik 18:00 danas
+"Zapiši da moram platiti račun do petka" → beleška sa sadržajem
+"Imam sastanak sa Jovom u utorak u 15:30" → događaj utorak 15:30
+"Dodaj zadatak kupi poklone za Anin rođendan hitno" → zadatak visok prioritet
+"Setuj alarm za podne" → alarm 12:00
+"Probudi me za 2 sata" → alarm za 2 sata od sad
+"Zapamti lozinku za wifi je 12345" → beleška
+"Treba da nazovem doktora sutra ujutru" → zadatak ili podsetnik
+
+Vrati SAMO validan JSON, bez ikakvog teksta pre ili posle:
+{
+  "action": "alarm|note|task|reminder|event|chat|multi",
+  "items": [
+    {
+      "type": "alarm|note|task|reminder|event",
+      "label": "naziv",
+      "content": "sadržaj (za beleške)",
+      "time": "HH:MM",
+      "date": "YYYY-MM-DD ili null",
+      "datetime": "YYYY-MM-DDTHH:MM ili null",
+      "priority": "high|medium|low",
+      "repeat": "once|daily|weekdays|weekends",
+      "confirmed_text": "Šta ću reći korisniku"
+    }
+  ],
+  "luna_response": "Prirodan odgovor Lune korisniku"
+}
+
+Za "multi" action vrati više items u nizu.
+Ako ne razumeš šta treba uraditi, vrati action:"chat".
+Uvek izračunaj tačne datume i vremena na osnovu trenutnog vremena.`;
+
+  let resp='';
+  if(isOnline&&(groqKey||geminiKey)){
+    resp=await callBestAI([{role:'user',content:text}],sysPrompt,600,0.2)||'';
+  }
+  
+  // Try to parse JSON response
+  if(resp){
+    try{
+      const clean=resp.replace(/```json|```/g,'').trim();
+      const parsed=JSON.parse(clean);
+      await executeLunaAction(parsed,text);
+      return;
+    }catch(e){
+      console.log('Parse error:',e,resp);
+    }
+  }
+  
+  // Offline fallback - local pattern matching
+  await lunaOfflineProcess(text);
+}
+
+async function executeLunaAction(parsed,originalText){
+  const items=parsed.items||[];
+  const results=[];
+  
+  for(const item of items){
+    const now=new Date();
+    try{
+      if(item.type==='alarm'){
+        const id=Date.now().toString()+Math.random();
+        let timeStr=item.time||'08:00';
+        await dbP('alarms',{id:id.toString(),label:item.label||'Alarm',time:timeStr,repeat:item.repeat||'once',active:true,created:Date.now()});
+        results.push(`⏰ Alarm "${item.label}" u ${timeStr}`);
+        if(curScr==='screenAlarms')renderAlarms();
+      }
+      else if(item.type==='note'){
+        const id=Date.now().toString()+Math.random();
+        const reminder=item.datetime||null;
+        await dbP('notes',{id:id.toString(),title:item.label||'Beleška',content:item.content||originalText,reminder:reminder,created:Date.now()});
+        results.push(`📋 Beleška "${item.label}"`);
+        if(curScr==='screenNotes')renderNotes();
+      }
+      else if(item.type==='task'){
+        const id=Date.now().toString()+Math.random();
+        await dbP('tasks',{id:id.toString(),title:item.label||'Zadatak',note:item.content||'',deadline:item.datetime||'',priority:item.priority||'medium',done:false,created:Date.now()});
+        results.push(`✅ Zadatak "${item.label}" [${item.priority||'medium'}]`);
+        if(curScr==='screenTasks')renderTasks();
+      }
+      else if(item.type==='reminder'){
+        const id=Date.now().toString()+Math.random();
+        await dbP('reminders',{id:id.toString(),title:item.label||'Podsetnik',content:item.content||'',datetime:item.datetime||'',fired:false,created:Date.now()});
+        results.push(`🔔 Podsetnik "${item.label}"${item.datetime?' u '+fdt(item.datetime):''}`);
+        if(curScr==='screenReminders')renderReminders();
+      }
+      else if(item.type==='event'){
+        const id=Date.now().toString()+Math.random();
+        await dbP('events',{id:id.toString(),title:item.label||'Događaj',datetime:item.datetime||'',desc:item.content||'',created:Date.now()});
+        results.push(`📅 Događaj "${item.label}"${item.datetime?' '+fdt(item.datetime):''}`);
+        if(curScr==='screenCalendar')renderCal();
+      }
+    }catch(e){console.log('Item error:',e);}
+  }
+  
+  await dash();
+  
+  const lunaResp=parsed.luna_response||`Razumela sam! ${results.join(', ')}`;
+  
+  if(parsed.action==='chat'||items.length===0){
+    showScreen('screenChat');
+    setTimeout(()=>sendMessageToAI_direct(originalText),300);
+    return;
+  }
+  
+  // Show result toast
+  toast(`✅ ${results.join(' · ')}`);
+  
+  // Luna speaks the confirmation
+  speak(lunaResp);
+  
+  // Add to chat history
+  addMsg('luna',`${lunaResp}
+
+Kreirano: ${results.join(', ')}`);
+}
+
+async function sendMessageToAI_direct(text){
+  chatHist.push({role:'user',content:text});
+  const msgs=document.getElementById('chatMessages');
+  const el=document.createElement('div');
+  const tid='t'+Date.now();
+  el.id=tid;el.className='msg luna';
+  el.innerHTML='<div class="tdots"><div class="td"></div><div class="td"></div><div class="td"></div></div>';
+  msgs.appendChild(el);msgs.scrollTop=msgs.scrollHeight;
+  let resp=await offAI(text);
+  if(isOnline&&(groqKey||geminiKey)){
+    const r=await callBestAI(chatHist.slice(-8),buildSys(),400,.7);
+    if(r){resp=r;}
+  }
+  document.getElementById(tid)?.remove();
+  addMsg('luna',resp);chatHist.push({role:'assistant',content:resp});
+  if(settings.tts)speak(resp);
+}
+
+async function lunaOfflineProcess(text){
+  // Smart offline pattern matching for Serbian
+  const l=text.toLowerCase();
+  const now=new Date();
+  const created=[];
+  
+  // Time extraction helpers
+  function extractTime(str){
+    const m=str.match(/(\d{1,2})[:\s](\d{2})/)||str.match(/u\s+(\d{1,2})\s*(?:sati|:(\d{2}))?/)||str.match(/(\d{1,2})\s*h/);
+    if(m){const h=parseInt(m[1]);const min=parseInt(m[2]||m[3]||'0');if(h>=0&&h<=23)return `${String(h).padStart(2,'0')}:${String(min).padStart(2,'0')}`;}
+    if(str.includes('podne')||str.includes('12'))return '12:00';
+    if(str.includes('ponoć'))return '00:00';
+    if(str.includes('jutro'))return '08:00';
+    if(str.includes('večer'))return '20:00';
+    if(str.includes('popodne'))return '15:00';
+    // "za X sati/minuta"
+    const zaH=str.match(/za\s+(\d+)\s*sat/);if(zaH){const d=new Date(now.getTime()+parseInt(zaH[1])*3600000);return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;}
+    const zaM=str.match(/za\s+(\d+)\s*minut/);if(zaM){const d=new Date(now.getTime()+parseInt(zaM[1])*60000);return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;}
+    return null;
+  }
+  
+  function extractDate(str){
+    const yr=now.getFullYear(),mo=now.getMonth(),d=now.getDate();
+    if(str.includes('sutra'))return new Date(yr,mo,d+1);
+    if(str.includes('prekosutra'))return new Date(yr,mo,d+2);
+    if(str.includes('danas'))return now;
+    const days={ponedeljak:1,utorak:2,srijeda:3,sreda:3,četvrtak:4,cetvrtak:4,petak:5,subota:6,nedjelja:0,nedelja:0};
+    for(const[name,dn] of Object.entries(days)){if(str.includes(name)){const diff=(dn-now.getDay()+7)%7||7;return new Date(yr,mo,d+diff);}}
+    return now;
+  }
+  
+  function toDateTimeStr(date,time){
+    if(!time)return null;
+    const d=new Date(date);
+    const [h,m]=time.split(':');
+    d.setHours(parseInt(h),parseInt(m),0,0);
+    return d.toISOString().slice(0,16);
+  }
+  
+  // ALARM patterns
+  const alarmKeywords=['probudi','alarm','postavi alarm','setuj alarm','ustaj','budi me'];
+  if(alarmKeywords.some(k=>l.includes(k))){
+    const t=extractTime(l)||'08:00';
+    const date=extractDate(l);
+    const label=l.includes('jutro')?'Jutarnji alarm':l.includes('podne')?'Podnevni alarm':l.includes('večer')?'Večernji alarm':'Alarm';
+    const id=Date.now().toString();
+    const rpt=l.includes('svaki dan')||l.includes('svako jutro')?'daily':l.includes('radni')?'weekdays':'once';
+    await dbP('alarms',{id,label,time:t,repeat:rpt,active:true,created:Date.now()});
+    created.push(`⏰ Alarm "${label}" u ${t}`);
+    if(curScr==='screenAlarms')renderAlarms();
+  }
+  
+  // REMINDER patterns
+  const remKeywords=['podseti','podsetnik','ne zaboravi','zapamti da','setovi podsetnik'];
+  if(remKeywords.some(k=>l.includes(k))){
+    const t=extractTime(l);
+    const date=extractDate(l);
+    const dt=toDateTimeStr(date,t||'09:00');
+    // Extract content after keyword
+    let content=text;
+    remKeywords.forEach(k=>{content=content.replace(new RegExp(k,'gi'),'');});
+    content=content.replace(/\s+(sutra|danas|večeras|ujutru|u\s+\d+.*)/gi,'').trim();
+    const id=Date.now().toString();
+    await dbP('reminders',{id,title:content.substring(0,50)||'Podsetnik',content:text,datetime:dt,fired:false,created:Date.now()});
+    created.push(`🔔 Podsetnik "${content.substring(0,30)}"${dt?' u '+fdt(dt):''}`);
+    if(curScr==='screenReminders')renderReminders();
+  }
+  
+  // NOTE patterns
+  const noteKeywords=['zapiši','zapamti','beleška','napiši','sačuvaj','zapíši'];
+  if(noteKeywords.some(k=>l.includes(k))){
+    let content=text;
+    noteKeywords.forEach(k=>{content=content.replace(new RegExp(k,'gi'),'');});
+    content=content.trim();
+    const id=Date.now().toString();
+    await dbP('notes',{id,title:content.substring(0,40)||'Beleška',content:text,reminder:null,created:Date.now()});
+    created.push(`📋 Beleška "${content.substring(0,30)}"`);
+    if(curScr==='screenNotes')renderNotes();
+  }
+  
+  // TASK patterns
+  const taskKeywords=['dodaj zadatak','treba da','moram da','ne smeš zaboraviti','kupiti','kupi','uradi','završi'];
+  const hasTime=extractTime(l);
+  if(taskKeywords.some(k=>l.includes(k))&&!created.length){
+    let title=text;
+    taskKeywords.forEach(k=>{title=title.replace(new RegExp(k,'gi'),'');});
+    title=title.trim();
+    const prio=l.includes('hitno')||l.includes('urgent')||l.includes('važno')?'high':l.includes('možda')||l.includes('eventualno')?'low':'medium';
+    const t=extractTime(l);const date=extractDate(l);
+    const id=Date.now().toString();
+    await dbP('tasks',{id,title:title.substring(0,60)||'Zadatak',note:text,deadline:t?toDateTimeStr(date,t):'',priority:prio,done:false,created:Date.now()});
+    created.push(`✅ Zadatak "${title.substring(0,30)}" [${prio}]`);
+    if(curScr==='screenTasks')renderTasks();
+  }
+  
+  await dash();
+  
+  if(created.length){
+    toast(`✅ ${created.join(' · ')}`);
+    const p=curPers;
+    const replies={smart:`Gotovo, ${uName}! Kreirao sam: ${created.join(', ')}.`,funny:`Super, ${uName}! 🎉 ${created.join(', ')} — gotovo!`,oracle:`Zapisano je u knjizi sudbine... ${created.join(', ')}.`,business:`Izvršeno. ${created.join(', ')}.`,friendly:`Naravno, ${uName}! ❤️ ${created.join(', ')}.`};
+    speak(replies[p]||replies.smart);
+    addMsg('luna','Razumela sam te! Automatski sam kreirala: '+created.join(', '));
+  }else{
+    // Nothing matched, go to chat
+    showScreen('screenChat');
+    setTimeout(()=>sendMessageToAI_direct(text),300);
+  }
+}
+
+function showToastLong(msg){toast(msg,4000);}
+let chatRec=null,chatListen=false;
+function toggleChatVoice(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){toast('Nije podržano');return;}if(chatListen){if(chatRec)chatRec.stop();return;}chatRec=new SR();chatRec.lang='sr-RS';chatRec.onstart=()=>{chatListen=true;document.getElementById('chatListenWave').classList.remove('hidden');};chatRec.onend=()=>{chatListen=false;document.getElementById('chatListenWave').classList.add('hidden');};chatRec.onresult=e=>{document.getElementById('chatInput').value=e.results[0][0].transcript;sendChat();};chatRec.onerror=()=>{chatListen=false;document.getElementById('chatListenWave').classList.add('hidden');};try{chatRec.start();}catch(e){}}
+
+// ---- AI ----
+function updChatSt(){
+  const l=document.getElementById('chatStatusLabel');
+  if(!isOnline){l.textContent='💻 Offline AI';return;}
+  const ai=getActiveAI();
+  if(ai==='gemini'&&geminiOK)l.textContent='✨ Gemini AI — Online';
+  else if(ai==='groq'&&groqOK)l.textContent='⚡ Groq AI — Online';
+  else if(ai==='both'&&geminiOK)l.textContent='✨ Gemini AI — Online';
+  else if(ai==='both'&&groqOK)l.textContent='⚡ Groq AI — Online';
+  else if(geminiKey||groqKey)l.textContent='🔄 Provjera API...';
+  else l.textContent='💻 Offline AI';
+}
+async function sendChat(){const inp=document.getElementById('chatInput');const t=inp.value.trim();if(!t)return;inp.value='';aResize(inp);await aiMsg(t);}
+async function aiMsg(text){if(!text.trim())return;addMsg('user',text);chatHist.push({role:'user',content:text});const tid='t'+Date.now();const msgs=document.getElementById('chatMessages');const el=document.createElement('div');el.id=tid;el.className='msg luna';el.innerHTML='<div class="tdots"><div class="td"></div><div class="td"></div><div class="td"></div></div>';msgs.appendChild(el);msgs.scrollTop=msgs.scrollHeight;let resp='';if(isOnline&&groqKey){try{const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Authorization':`Bearer ${groqKey}`,'Content-Type':'application/json'},body:JSON.stringify({model:'llama3-8b-8192',messages:[{role:'system',content:buildSys()},...chatHist.slice(-10)],max_tokens:500,temperature:.7})});if(r.ok){const d=await r.json();resp=d.choices[0]?.message?.content||'Nema odgovora.';groqOK=true;updAIBadge(true);}else{groqOK=false;resp=await offAI(text);}}catch(e){groqOK=false;resp=await offAI(text);}}else resp=await offAI(text);document.getElementById(tid)?.remove();addMsg('luna',resp);chatHist.push({role:'assistant',content:resp});if(settings.tts)speak(resp);updChatSt();}
+async function callGemini(messages,sysPrompt,maxTokens=500){
+  if(!geminiKey||!isOnline) return null;
+  try{
+    const contents=[];
+    if(sysPrompt) contents.push({role:'user',parts:[{text:'[SYSTEM] '+sysPrompt}]},{role:'model',parts:[{text:'Razumela sam. Ponašam se kao Luna, AI sekretarica.'}]});
+    messages.forEach(m=>{contents.push({role:m.role==='assistant'?'model':'user',parts:[{text:m.content}]});});
+    const r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key='+geminiKey,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({contents,generationConfig:{maxOutputTokens:maxTokens,temperature:0.7}})
+    });
+    if(r.ok){
+      const d=await r.json();
+      geminiOK=true;
+      updAIBadge(true);
+      return d.candidates?.[0]?.content?.parts?.[0]?.text||null;
+    }
+    const err=await r.json().catch(()=>({}));
+    console.warn('Gemini error:',r.status,err?.error?.message);
+    geminiOK=false; return null;
+  }catch(e){console.warn('Gemini fetch error:',e);geminiOK=false;return null;}
+}
+
+async function callGroq(messages,sysPrompt,maxTokens=500,temp=0.7){
+  if(!groqKey||!isOnline) return null;
+  try{
+    const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{
+      method:'POST',
+      headers:{'Authorization':'Bearer '+groqKey,'Content-Type':'application/json'},
+      body:JSON.stringify({model:'llama3-8b-8192',messages:[{role:'system',content:sysPrompt},...messages],max_tokens:maxTokens,temperature:temp})
+    });
+    if(r.ok){const d=await r.json();groqOK=true;updAIBadge(true);return d.choices[0]?.message?.content||null;}
+    const e=await r.json().catch(()=>({}));
+    console.warn('Groq error:',r.status,e?.error?.message);
+    groqOK=false;return null;
+  }catch(e){console.warn('Groq fetch error:',e);groqOK=false;return null;}
+}
+
+async function callBestAI(messages,sysPrompt,maxTokens=500,temp=0.7){
+  const ai=getActiveAI();
+  let resp=null;
+  if(ai==='gemini'||ai==='both'){
+    resp=await callGemini(messages,sysPrompt,maxTokens);
+    if(resp){updAIBadge(true);return resp;}
+  }
+  if(ai==='groq'||ai==='both'){
+    resp=await callGroq(messages,sysPrompt,maxTokens,temp);
+    if(resp){updAIBadge(true);return resp;}
+  }
+  // Fallback: try the other one
+  if(ai==='groq'&&geminiKey){resp=await callGemini(messages,sysPrompt,maxTokens);if(resp){geminiOK=true;updAIBadge(true);return resp;}}
+  if(ai==='gemini'&&groqKey){resp=await callGroq(messages,sysPrompt,maxTokens,temp);if(resp){groqOK=true;updAIBadge(true);return resp;}}
+  updAIBadge(false);return null;
+}
+
+function buildSys(){const p=PERS[curPers]||PERS.smart;const n=new Date();return `${p.prompt}\nDatum: ${n.toLocaleDateString('sr-RS')}\nVreme: ${n.toLocaleTimeString('sr-RS')}\nKorisnik: ${uName}\nOdgovaraj kratko (2-4 rečenice).`;}
+async function offAI(t){const l=t.toLowerCase(),p=curPers,n=new Date();if(l.includes('zdravo')||l.includes('ćao')||l.includes('bok'))return{smart:`Zdravo, ${uName}!`,funny:`Ej ${uName}! 😄`,oracle:`${uName}... 🔮`,business:`Dobar dan, ${uName}.`,friendly:`Hej ${uName}! ❤️`}[p]||`Zdravo!`;if(l.includes('koliko je')&&(l.includes('sat')||l.includes('vreme')))return `Sada je ${n.toLocaleTimeString('sr-RS',{hour:'2-digit',minute:'2-digit'})}.`;if(l.includes('kako si'))return{smart:'Sve OK!',funny:'Odlično! 😁',oracle:'Postojim... 🔮',business:'Nominalno.',friendly:'Super! ❤️'}[p]||'Dobro!';if(l.includes('zadatak')||l.includes('obaveze')){const tasks=await dbG('tasks');const a=tasks.filter(x=>!x.done);return a.length?`Imaš ${a.length} zadataka. Prioritetni: "${a[0].title}".`:`Nemaš aktivnih zadataka! 🎉`;}if(l.includes('hvala'))return{smart:`Uvek tu, ${uName}!`,funny:'Ma hajde! 😊',oracle:'Hvala se vraća...',business:'Na usluzi.',friendly:'Drago mi je! ❤️'}[p]||'Nema na čemu!';return{smart:`Offline mod — dodaj Groq API ključ za napredne odgovore.`,funny:`Offline sam! 🤔 Groq API u Opcijama!`,oracle:`Odgovor je u Groq API ključu. 🔮`,business:`Offline. Dodaj Groq API za pun pristup.`,friendly:`Radim offline. Dodaj Groq API! 😊`}[p];}
+function addMsg(role,text){const m=document.getElementById('chatMessages');const d=document.createElement('div');d.className=`msg ${role}`;const n=new Date();d.innerHTML=`${esc(text)}<div class="msg-t">${n.getHours()}:${String(n.getMinutes()).padStart(2,'0')}</div>`;m.appendChild(d);m.scrollTop=m.scrollHeight;}
+function chatKD(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat();}}
+function aResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,105)+'px';}
+
+// ---- CONNECTIVITY ----
+function updConn(){isOnline=navigator.onLine;updAIBadge(isOnline&&groqOK);updDots();}
+function updAIBadge(g){
+  const b=document.getElementById('aiStatusBadge');
+  const using=getActiveAI();
+  if(using==='gemini'&&geminiOK){b.className='ai-badge groq';b.style.background='linear-gradient(135deg,#1a73e8,#4285f4,#34a853)';b.innerHTML='✨ Gemini';}
+  else if(using==='groq'&&groqOK){b.className='ai-badge groq';b.style.background='';b.innerHTML='⚡ Groq';}
+  else if(using==='both'&&(groqOK||geminiOK)){b.className='ai-badge groq';b.style.background='linear-gradient(135deg,#7c3aed,#4f8ef7)';b.innerHTML='🔥 AI Online';}
+  else{b.className='ai-badge offline';b.style.background='';b.innerHTML=isOnline?'🌐 Online':'💻 Offline';}
+}
+function getActiveAI(){
+  if(activeAI==='groq') return groqKey?'groq':'offline';
+  if(activeAI==='gemini') return geminiKey?'gemini':'offline';
+  if(activeAI==='auto'){
+    if(groqKey&&geminiKey) return 'both';
+    if(groqKey) return 'groq';
+    if(geminiKey) return 'gemini';
+    return 'offline';
+  }
+  return 'offline';
+}
+function updDots(){
+  const s=(id,ok,t)=>{const d=document.getElementById(id);if(d){d.className=`sdot ${ok?'ok':'err'}`;d.textContent=t;}};
+  s('statusInternet',isOnline,isOnline?'Online':'Offline');
+  s('statusGroq',groqOK,`Groq ${groqOK?'OK':groqKey?'Err':'—'}`);
+  s('statusGroqH',groqOK,`Groq ${groqOK?'OK':groqKey?'Err':'—'}`);
+  const gEl=document.getElementById('statusGemini');if(gEl){gEl.className=`sdot ${geminiOK?'ok':'err'}`;gEl.textContent=`Gemini ${geminiOK?'OK':geminiKey?'Err':'—'}`;}
+  const hasSR=!!(window.SpeechRecognition||window.webkitSpeechRecognition);
+  s('statusMic',hasSR,hasSR?'Mik OK':'Nema');s('statusTTS',!!synth,synth?'TTS OK':'Nema');s('statusDB',!!db,db?'DB OK':'Nema');
+}
+
+// ---- SETTINGS ----
+function loadSettUI(){
+  document.getElementById('groqApiKeyInput').value=groqKey;
+  const gki=document.getElementById('geminiApiKeyInput');if(gki)gki.value=geminiKey;
+  const ais=document.getElementById('activeAISelect');if(ais)ais.value=activeAI;document.getElementById('userNameInput').value=uName;const th=document.body.getAttribute('data-theme')||'dark';['light','dark','amoled'].forEach(t=>{document.getElementById(`themeOpt${t.charAt(0).toUpperCase()+t.slice(1)}`)?.classList.remove('active');});document.getElementById(`themeOpt${th.charAt(0).toUpperCase()+th.slice(1)}`)?.classList.add('active');document.getElementById('toggleGreeting').className=`tog ${settings.greeting?'on':''}`;document.getElementById('toggleTTS').className=`tog ${settings.tts?'on':''}`;document.getElementById('toggleVoiceNotif').className=`tog ${settings.voiceNotif?'on':''}`;updFullSt();}
+function saveGroqKey(){
+  groqKey=document.getElementById('groqApiKeyInput').value.trim();
+  localStorage.setItem('groqKey',groqKey);
+  geminiKey=document.getElementById('geminiApiKeyInput')?.value.trim()||geminiKey;
+  localStorage.setItem('geminiKey',geminiKey);
+  activeAI=document.getElementById('activeAISelect')?.value||activeAI;
+  localStorage.setItem('activeAI',activeAI);
+  if(!groqKey&&!geminiKey){groqOK=false;geminiOK=false;updAIBadge(false);}
+  updDots();
+  toast('💾 Podešavanja sačuvana');
+}
+function saveUserName(){uName=document.getElementById('userNameInput').value.trim()||'Saša';localStorage.setItem('userName',uName);document.getElementById('userPill').textContent=uName;}
+async function testGroq(){
+  const btn=document.getElementById('testGroqBtn'),res=document.getElementById('groqTestResult');
+  btn.innerHTML='<span class="spinner"></span> Test...';
+  res.innerHTML='<span style="color:#f59e0b">⏳ Testiram...</span>';
+  
+  // Read current values from inputs
+  const gk=document.getElementById('groqApiKeyInput')?.value.trim()||groqKey;
+  const gmk=document.getElementById('geminiApiKeyInput')?.value.trim()||geminiKey;
+  if(gk) groqKey=gk;
+  if(gmk) geminiKey=gmk;
+  localStorage.setItem('groqKey',groqKey);
+  localStorage.setItem('geminiKey',geminiKey);
+  
+  const results=[];
+  
+  // Test Groq
+  if(groqKey){
+    try{
+      const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{
+        method:'POST',
+        headers:{'Authorization':'Bearer '+groqKey,'Content-Type':'application/json'},
+        body:JSON.stringify({model:'llama3-8b-8192',messages:[{role:'user',content:'Hi'}],max_tokens:3})
+      });
+      if(r.ok){
+        groqOK=true;
+        results.push('<span style="color:#22c55e;font-weight:700">✅ Groq aktivan!</span>');
+      } else {
+        const err=await r.json().catch(()=>({error:{message:r.status}}));
+        groqOK=false;
+        const msg=err?.error?.message||('HTTP '+r.status);
+        results.push('<span style="color:#ef4444">❌ Groq: '+msg.substring(0,40)+'</span>');
+      }
+    }catch(e){
+      groqOK=false;
+      results.push('<span style="color:#ef4444">❌ Groq: '+e.message.substring(0,40)+'</span>');
+    }
+  } else {
+    results.push('<span style="color:#6b7280">— Groq ključ nije unesen</span>');
+  }
+  
+  // Test Gemini
+  if(geminiKey){
+    try{
+      const r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key='+geminiKey,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({contents:[{role:'user',parts:[{text:'Hi'}]}],generationConfig:{maxOutputTokens:3}})
+      });
+      if(r.ok){
+        geminiOK=true;
+        results.push('<span style="color:#22c55e;font-weight:700">✅ Gemini aktivan!</span>');
+      } else {
+        const err=await r.json().catch(()=>({error:{message:r.status}}));
+        geminiOK=false;
+        const msg=err?.error?.message||err?.error?.status||('HTTP '+r.status);
+        results.push('<span style="color:#ef4444">❌ Gemini: '+msg.substring(0,40)+'</span>');
+      }
+    }catch(e){
+      geminiOK=false;
+      results.push('<span style="color:#ef4444">❌ Gemini: '+e.message.substring(0,40)+'</span>');
+    }
+  } else {
+    results.push('<span style="color:#6b7280">— Gemini ključ nije unesen</span>');
+  }
+  
+  res.innerHTML=results.join('<br>');
+  updAIBadge(groqOK||geminiOK);
+  btn.innerHTML='🔗 Test veze';
+  updDots();
+  if(groqOK||geminiOK) toast('✅ AI veza uspostavljena!');
+}
+function togSet(k,el){settings[k]=!settings[k];el.className=`tog ${settings[k]?'on':''}`;localStorage.setItem('setting_'+k,settings[k]);}
+function setTheme(t){document.body.setAttribute('data-theme',t);localStorage.setItem('theme',t);['light','dark','amoled'].forEach(x=>{document.getElementById(`themeOpt${x.charAt(0).toUpperCase()+x.slice(1)}`)?.classList.remove('active');});document.getElementById(`themeOpt${t.charAt(0).toUpperCase()+t.slice(1)}`)?.classList.add('active');document.getElementById('themeBtn').textContent=t==='light'?'☀️':t==='amoled'?'⚫':'🌙';}
+function cycleTheme(){const c=document.body.getAttribute('data-theme')||'dark';const ts=['dark','light','amoled'];setTheme(ts[(ts.indexOf(c)+1)%ts.length]);}
+function updFullSt(){const p=document.getElementById('fullStatusPanel');if(!p)return;const it=[{l:'Internet',ok:isOnline},{l:'Groq API',ok:groqOK},{l:'Gemini API',ok:geminiOK},{l:'Mikrofon',ok:!!(window.SpeechRecognition||window.webkitSpeechRecognition)},{l:'TTS',ok:!!synth},{l:'Baza',ok:!!db},{l:'PWA',ok:window.matchMedia('(display-mode:standalone)').matches}];p.innerHTML=it.map(i=>`<div class="spill"><span style="width:6px;height:6px;border-radius:50%;background:${i.ok?'#22c55e':'#ef4444'};display:inline-block;margin-right:3px;box-shadow:0 0 4px ${i.ok?'rgba(34,197,94,.7)':'rgba(239,68,68,.5)'}"></span>${i.l}</div>`).join('');}
+function setPers(n,el){curPers=n;document.querySelectorAll('.pb').forEach(b=>b.classList.remove('active'));el.classList.add('active');localStorage.setItem('personality',n);toast(`🎭 ${PERS[n]?.name||n}`);}
+
+// ---- GREETING ----
+async function greet(){if(!settings.greeting)return;const [tasks,alarms,reminders]=await Promise.all([dbG('tasks'),dbG('alarms'),dbG('reminders')]);const n=new Date(),h=n.getHours();const g=h<12?'Dobro jutro':h<18?'Dobar dan':'Dobro veče';const parts=[];const aT=tasks.filter(t=>!t.done).length,aR=reminders.filter(r=>!r.fired).length,aA=alarms.filter(a=>a.active).length;if(aT)parts.push(`${aT} zadataka`);if(aR)parts.push(`${aR} podsetnika`);if(aA)parts.push(`${aA} alarma`);const tx=`${g}, ${uName}. ${parts.length?`Danas imaš ${parts.join(', ')}.`:'Nemaš planiranih obaveza. Lep dan!'}`;setTimeout(()=>speak(tx),1200);}
+
+// ---- SEARCH ----
+async function doSearch(q){if(!q.trim())return;const l=q.toLowerCase();const [notes,tasks,reminders]=await Promise.all([dbG('notes'),dbG('tasks'),dbG('reminders')]);const total=notes.filter(n=>n.title.toLowerCase().includes(l)||n.content.toLowerCase().includes(l)).length+tasks.filter(t=>t.title.toLowerCase().includes(l)).length+reminders.filter(r=>r.title.toLowerCase().includes(l)).length;toast(`🔍 ${total} rezultata za "${q}"`);}
+
+// ---- NOTIF ----
+async function reqNotif(){if('Notification'in window&&Notification.permission==='default')await Notification.requestPermission();}
+function notif(t,b){if('Notification'in window&&Notification.permission==='granted')try{new Notification(t,{body:b});}catch(e){}}
+
+// ---- EXPORT/IMPORT ----
+async function exportData(){const d={};for(const s of['notes','alarms','tasks','reminders','events'])d[s]=await dbG(s);d.settings={groqKey,uName,pers:curPers};const bl=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});const u=URL.createObjectURL(bl);const a=document.createElement('a');a.href=u;a.download=`luna-${new Date().toISOString().slice(0,10)}.json`;a.click();URL.revokeObjectURL(u);toast('📤 Exportovano');}
+function importData(){const i=document.createElement('input');i.type='file';i.accept='.json';i.onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());for(const s of['notes','alarms','tasks','reminders','events'])if(d[s])for(const x of d[s])await dbP(s,x);if(d.settings){if(d.settings.groqKey){groqKey=d.settings.groqKey;localStorage.setItem('groqKey',groqKey);}if(d.settings.uName){uName=d.settings.uName;localStorage.setItem('userName',uName);}}dash();toast('📥 Uvezeno');}catch(e){toast('❌ Greška');}};i.click();}
+function confirmClear(){if(confirm('Obrisati sve podatke?')){['notes','alarms','tasks','reminders','events'].forEach(async s=>{const items=await dbG(s);for(const x of items)await dbD(s,x.id);});dash();toast('🗑️ Obrisano');}}
+
+// ---- HELPERS ----
+function toast(msg,dur=2500){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),dur);}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function fd(ts){const d=new Date(ts);return `${d.getDate()}.${d.getMonth()+1}.${d.getFullYear()}`;}
+function fdt(s){if(!s)return'';const d=new Date(s);if(isNaN(d))return s;return `${d.getDate()}.${d.getMonth()+1} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;}
+async function del(store,id,fn){await dbD(store,id);if(fn)fn();dash();toast('🗑️ Obrisano');}
+
+// ---- SW ----
+function regSW(){if('serviceWorker'in navigator){const b=new Blob([`const C='luna-v3';self.addEventListener('install',e=>{self.skipWaiting();});self.addEventListener('activate',e=>{e.waitUntil(self.clients.claim());});self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith(caches.match(e.request).then(c=>c||fetch(e.request)));});`],{type:'application/javascript'});navigator.serviceWorker.register(URL.createObjectURL(b)).catch(()=>{});}}
+
+// ---- INIT ----
+async function init(){
+  groqKey=localStorage.getItem('groqKey')||'';
+  geminiKey=localStorage.getItem('geminiKey')||'';
+  activeAI=localStorage.getItem('activeAI')||'auto';
+  uName=localStorage.getItem('userName')||'Saša';
+  curPers=localStorage.getItem('personality')||'smart';
+  const th=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+  ['greeting','tts','voiceNotif'].forEach(k=>{const v=localStorage.getItem('setting_'+k);if(v!==null)settings[k]=v==='true';});
+  document.body.setAttribute('data-theme',th);
+  document.getElementById('themeBtn').textContent=th==='light'?'☀️':th==='amoled'?'⚫':'🌙';
+  document.getElementById('userPill').textContent=uName;
+  loadCP();
+  await initDB();
+  updDots();
+  buildCP();
+  const pb=document.querySelector(`[data-p="${curPers}"]`);
+  if(pb){document.querySelectorAll('.pb').forEach(b=>b.classList.remove('active'));pb.classList.add('active');}
+  await dash();
+  startChecker();
+  rec=initSR();
+  if(synth)synth.onvoiceschanged=()=>{};
+  window.addEventListener('online',()=>{isOnline=true;updConn();toast('🌐 Internet spojen');});
+  window.addEventListener('offline',()=>{isOnline=false;updConn();toast('📵 Offline');});
+  await reqNotif();
+  regSW();
+  if(groqKey&&isOnline)fetch('https://api.groq.com/openai/v1/models',{headers:{'Authorization':`Bearer ${groqKey}`}}).then(r=>{groqOK=r.ok;updAIBadge(groqOK||geminiOK);updDots();}).catch(()=>{});
+  if(geminiKey&&isOnline)fetch('https://generativelanguage.googleapis.com/v1beta/models?key='+geminiKey).then(r=>{geminiOK=r.ok;updAIBadge(groqOK||geminiOK);updDots();}).catch(()=>{});
+  await greet();
+  const h=new Date().getHours();
+  addMsg('luna',`${h<12?'Dobro jutro':h<18?'Dobar dan':'Dobro veče'}, ${uName}! 👋 Ja sam Luna. Piši mi ili koristi glasovne komande.`);
+  updChatSt();
+}
+document.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>
